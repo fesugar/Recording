@@ -1,0 +1,19 @@
+﻿ 
+ 鼠标动作录制回放工具 V1.2
+
+
+ 感谢网络热心小伙伴提供的HOOK的封装类作为参考，才能更好的完成此项功能
+ 
+ https://my.oschina.net/u/1437658/blog/198175
+ https://blog.csdn.net/asciil/article/details/7195666
+ 
+ 致谢！！
+
+ 此工具完全免费
+
+ for .NET 4.6.1 
+
+
+      by  www.fesugar.com
+
+	  2019/2/17
