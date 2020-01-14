@@ -13,7 +13,7 @@ using System.Timers;
 
 using System.Windows.Forms; //Keys枚举在这里面
 
-namespace io_apis
+namespace Io_Api
 
 {
 
@@ -65,7 +65,7 @@ namespace io_apis
 
 
 
-    public class Io_Api
+    public class Io_hook
 
     {
 
@@ -73,7 +73,7 @@ namespace io_apis
 
         [DllImport("user32.dll", EntryPoint = "mouse_event")]
 
-        public static extern void mouse_event(MouseEventFlag dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+        public static extern void Mouse_event(MouseEventFlag dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
 
 
@@ -89,13 +89,13 @@ namespace io_apis
 
         [DllImport("user32.dll", EntryPoint = "keybd_event")]
 
-        public static extern void keybd_event(Byte bVk, Byte bScan, KeyEventFlag dwFlags, Int32 dwExtraInfo);
+        public static extern void Keybd_event(Byte bVk, Byte bScan, KeyEventFlag dwFlags, Int32 dwExtraInfo);
 
 
 
         //定时器
 
-        private System.Timers.Timer atimer = new System.Timers.Timer();
+        private readonly System.Timers.Timer atimer = new System.Timers.Timer();
 
 
 
@@ -107,14 +107,14 @@ namespace io_apis
 
         //初始化
 
-        public Io_Api()
+        public Io_hook()
         {
 
 
 
             //设置定时器事件
 
-            this.atimer.Elapsed += new ElapsedEventHandler(atimer_Elapsed);
+            this.atimer.Elapsed += new ElapsedEventHandler(Atimer_Elapsed);
 
             this.atimer.AutoReset = true;
 
@@ -126,11 +126,11 @@ namespace io_apis
 
         //鼠标操作 _dx,_dy 是鼠标距离当前位置的二维移动向量
 
-        public void mouse(MouseEventFlag _dwFlags, int _dx, int _dy)
+        public void Mouse(MouseEventFlag _dwFlags, int _dx, int _dy)
 
         {
 
-            mouse_event(_dwFlags, _dx, _dy, 0, 0);
+            Mouse_event(_dwFlags, _dx, _dy, 0, 0);
 
         }
 
@@ -142,7 +142,7 @@ namespace io_apis
         /// </summary>
         /// <param name="button">字符参数， L 左键 、 R 右键 、M 中间键</param>
         /// <param name="is_double">布尔值， 知否双击，默认FLASE</param>
-        public void mouse_click(string button = "L", bool is_double = false)
+        public void Mouse_click(string button = "L", bool is_double = false)
 
 
 
@@ -153,16 +153,16 @@ namespace io_apis
 
                 case "L":
 
-                    mouse_event(MouseEventFlag.LeftDown, 0, 0, 0, 0);
+                    Mouse_event(MouseEventFlag.LeftDown, 0, 0, 0, 0);
 
-                    mouse_event(MouseEventFlag.LeftUp, 0, 0, 0, 0);
+                    Mouse_event(MouseEventFlag.LeftUp, 0, 0, 0, 0);
 
                     if (is_double)
                     {
 
-                        mouse_event(MouseEventFlag.LeftDown, 0, 0, 0, 0);
+                        Mouse_event(MouseEventFlag.LeftDown, 0, 0, 0, 0);
 
-                        mouse_event(MouseEventFlag.LeftUp, 0, 0, 0, 0);
+                        Mouse_event(MouseEventFlag.LeftUp, 0, 0, 0, 0);
 
                     }
 
@@ -170,16 +170,16 @@ namespace io_apis
 
                 case "R":
 
-                    mouse_event(MouseEventFlag.RightDown, 0, 0, 0, 0);
+                    Mouse_event(MouseEventFlag.RightDown, 0, 0, 0, 0);
 
-                    mouse_event(MouseEventFlag.RightUp, 0, 0, 0, 0);
+                    Mouse_event(MouseEventFlag.RightUp, 0, 0, 0, 0);
 
                     if (is_double)
                     {
 
-                        mouse_event(MouseEventFlag.RightDown, 0, 0, 0, 0);
+                        Mouse_event(MouseEventFlag.RightDown, 0, 0, 0, 0);
 
-                        mouse_event(MouseEventFlag.RightUp, 0, 0, 0, 0);
+                        Mouse_event(MouseEventFlag.RightUp, 0, 0, 0, 0);
 
                     }
 
@@ -187,17 +187,17 @@ namespace io_apis
 
                 case "M":
 
-                    mouse_event(MouseEventFlag.MiddleDown, 0, 0, 0, 0);
+                    Mouse_event(MouseEventFlag.MiddleDown, 0, 0, 0, 0);
 
-                    mouse_event(MouseEventFlag.MiddleUp, 0, 0, 0, 0);
+                    Mouse_event(MouseEventFlag.MiddleUp, 0, 0, 0, 0);
 
                     if (is_double)
 
                     {
 
-                        mouse_event(MouseEventFlag.MiddleDown, 0, 0, 0, 0);
+                        Mouse_event(MouseEventFlag.MiddleDown, 0, 0, 0, 0);
 
-                        mouse_event(MouseEventFlag.MiddleUp, 0, 0, 0, 0);
+                        Mouse_event(MouseEventFlag.MiddleUp, 0, 0, 0, 0);
 
                     }
 
@@ -211,7 +211,7 @@ namespace io_apis
 
         //鼠标移动到 指定位置(_dx,_dy)
 
-        public void mouse_move(int _dx, int _dy)
+        public void Mouse_move(int _dx, int _dy)
 
         {
 
@@ -223,11 +223,11 @@ namespace io_apis
 
         //键盘操作
 
-        public void keybd(Byte _bVk, KeyEventFlag _dwFlags)
+        public void Keybd(Byte _bVk, KeyEventFlag _dwFlags)
 
         {
 
-            keybd_event(_bVk, 0, _dwFlags, 0);
+            Keybd_event(_bVk, 0, _dwFlags, 0);
 
         }
 
@@ -235,7 +235,7 @@ namespace io_apis
 
         //键盘操作 带自动释放 dwFlags_time 单位:毫秒
 
-        public void keybd(Byte __bVk, int dwFlags_time = 100)
+        public void Keybd(Byte __bVk, int dwFlags_time = 100)
 
         {
 
@@ -247,7 +247,7 @@ namespace io_apis
 
             this.atimer.Interval = dwFlags_time;
 
-            keybd(this.vbk, KeyEventFlag.Down);
+            Keybd(this.vbk, KeyEventFlag.Down);
 
             this.atimer.Enabled = true;
 
@@ -257,7 +257,7 @@ namespace io_apis
 
         //键盘操作 组合键 带释放
 
-        public void keybd(Byte[] _bVk)
+        public void Keybd(Byte[] _bVk)
 
         {
 
@@ -270,7 +270,7 @@ namespace io_apis
                 foreach (Byte __bVk in _bVk)
                 {
 
-                    keybd(__bVk, KeyEventFlag.Down);
+                    Keybd(__bVk, KeyEventFlag.Down);
 
                 }
 
@@ -286,7 +286,7 @@ namespace io_apis
 
                 {
 
-                    keybd(__bVk, KeyEventFlag.Up);
+                    Keybd(__bVk, KeyEventFlag.Up);
 
                 }
 
@@ -296,7 +296,7 @@ namespace io_apis
 
 
 
-        void atimer_Elapsed(object sender, ElapsedEventArgs e)
+        void Atimer_Elapsed(object sender, ElapsedEventArgs e)
 
         {
 
@@ -306,7 +306,7 @@ namespace io_apis
 
             //释放按键
 
-            keybd(this.vbk, KeyEventFlag.Up);
+            Keybd(this.vbk, KeyEventFlag.Up);
 
         }
 
@@ -314,7 +314,7 @@ namespace io_apis
 
         //获取键码 这一部分 就是根据字符串 获取 键码 这里只列出了一部分 可以自己修改
 
-        public Byte getKeys(string key)
+        public Byte GetKeys(string key)
 
         {
 

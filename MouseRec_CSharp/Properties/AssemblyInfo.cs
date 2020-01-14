@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Io_Api")]
+[assembly: AssemblyTitle("Recording ")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Io_Api")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyProduct("Recording for CSharp")]
+[assembly: AssemblyCopyright("Copyright © fesugar.com")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("b7f328f7-8934-47c8-9c5c-e03e1878a491")]
+[assembly: Guid("09fbbed4-b3eb-4749-bd74-59b9626ab219")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
@@ -29,8 +29,8 @@ using System.Runtime.InteropServices;
 //      生成号
 //      修订号
 //
-// 可以指定所有值，也可以使用以下所示的 "*" 预置版本号和修订号
-// 方法是按如下所示使用“*”: :
+//可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值
+//通过使用 "*"，如下所示:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.200.10")]
-[assembly: AssemblyFileVersion("1.0.200.10")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.2.52.60")]

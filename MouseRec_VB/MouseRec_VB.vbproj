@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8C5B26F8-4EDB-456C-8CC3-DEAE75E27C43}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>MouseRec.My.MyApplication</StartupObject>
-    <RootNamespace>MouseRec</RootNamespace>
+    <StartupObject>MouseRec_VB.My.MyApplication</StartupObject>
+    <RootNamespace>MouseRec_VB</RootNamespace>
     <AssemblyName>MouseRec</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
@@ -65,6 +65,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>MouseRec.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
@@ -136,7 +139,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Licenses.txt" />
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -148,7 +151,9 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="readme.rtf" />
+    <None Include="XMLSchemaRec.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Io_Api\Io_Api.csproj">
