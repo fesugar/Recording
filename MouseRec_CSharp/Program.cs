@@ -16,7 +16,14 @@ namespace MouseRec_CSharp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_Main());
+            using (System.Threading.Mutex mu = new System.Threading.Mutex(true, Application.ProductName, out bool create))
+            {
+                if (create)
+                {
+                    Application.Run(new Form_Main());
+                }
+            }
+            //Application.Run(new Form_Main());
         }
     }
 }

@@ -13,6 +13,9 @@ using System.Xml.Schema;
 
 namespace MouseRec_CSharp
 {
+    /// <summary>
+    /// 主窗体类
+    /// </summary>
     public partial class Form_Main : MetroFramework.Forms.MetroForm
     {
 
@@ -20,6 +23,11 @@ namespace MouseRec_CSharp
         /// xml 文件路径
         /// </summary>
         private string xml_FilePath;
+        /// <summary>
+        /// 间隔时间
+        /// </summary>
+        private double numeric1_Timestamp;
+        private double numeric2_Timestamp;
         /// <summary>
         /// 定义委托
         /// </summary>
@@ -32,6 +40,7 @@ namespace MouseRec_CSharp
 
         public Form_Main()
         {
+            // 初始化设计器的代码
             InitializeComponent();
         }
         /// <summary>
@@ -61,6 +70,9 @@ namespace MouseRec_CSharp
         /// <param name="e"></param>
         private void BtnRecording_Click(object sender, EventArgs e)
         {
+            // 如已经在回放中状态，退出，不执行
+            if (Convert.ToInt32(btnPlayback.Tag) == 1) return;
+
             // 检测录制按钮未在录制中
             if (Convert.ToInt16(this.btnRecording.Tag) == 0)
             {
@@ -146,16 +158,16 @@ namespace MouseRec_CSharp
         /// <param name="e"></param>
         private void BtnReset_Click(object sender, EventArgs e)
         {
-            // 清空dgvRec数据
-            this.dgvRec.Rows.Clear();
             // 重置初始化控件数设置
             this.Initia_();
+
         }
         /// <summary>
         /// 初始化控件设置
         /// </summary>
         public void Initia_()
         {
+
             // 检测是否设置了取消 bgwRun 任务
             if (this.bgwRun.WorkerSupportsCancellation)
             {
@@ -183,6 +195,19 @@ namespace MouseRec_CSharp
             if (m_GlobalHook != null) this.Unsubscribe();
             // 热键提示文本标签可见状态设置为隐藏
             this.lblHotkey.Visible = false;
+            // xml 文件路径设置为空
+            xml_FilePath = null;
+            toolStripMenuItemDelete.Text = "删除选中行";
+            // 重设时间
+            numeric1_Timestamp = 0;
+            numeric2_Timestamp = 0;
+
+            if (bgwRun.IsBusy)
+            { //检查到在异步任务，等待刷新，阻止还未停止，数据已清空异常
+                System.Threading.Thread.Sleep(1000);
+            }
+            // 清空dgvRec数据
+            this.dgvRec.Rows.Clear();
         }
         /// <summary>
         /// 载入记录单击事件
@@ -209,12 +234,11 @@ namespace MouseRec_CSharp
                         else
                         {
 
+                            this.Initia_();
                             this.xml_FilePath = dialog.FileName;
                             XmlDocument xmlDocument = new XmlDocument();
                             xmlDocument.Load(this.xml_FilePath);
                             XmlNodeList xmlNodeList = xmlDocument.SelectSingleNode("MouseRec").ChildNodes;
-                            this.dgvRec.Rows.Clear();
-                            this.Initia_();
 
                             foreach (XmlNode xmlNode in xmlNodeList)
                             {
@@ -229,9 +253,15 @@ namespace MouseRec_CSharp
                             this.BtnRecording_Click(this, e);   // 操作录制按钮更改回放按钮状态
                             this.BtnRecording_Click(this, e);   // 停止录制按钮
                             this.btnRecording.Enabled = false; // 禁用录制功能 -排序未解决
+                            toolStripMenuItemDelete.Text = "删除选中行（存储）";
+
                         }
                     }
                 }
+            }
+            catch (System.Xml.XmlException)
+            {
+                MetroMessageBox.Show(this, "\n打开的数据元错误，请选择正确的数据重试。", "数据错误！", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             catch (Exception ex)
             {
@@ -320,12 +350,12 @@ namespace MouseRec_CSharp
 
                 BackgroundWorker worker = sender as BackgroundWorker;
 
-                Io_Api.Io_hook Io_Api_hook  = new Io_Api.Io_hook();
+                Io_Api.Io_hook Io_Api_hook = new Io_Api.Io_hook();
 
                 do
                 {
 
-                    for (int i = dgvRec.RowCount - 1; i>=0; i+=-1)
+                    for (int i = dgvRec.RowCount - 1; i >= 0; i += -1)
                     {
                         // 监测是否有取消任务
                         if (worker.CancellationPending is true)
@@ -337,19 +367,18 @@ namespace MouseRec_CSharp
                         }
                         // 读取 dgvgridview 数据
                         string str1 = (String)dgvRec[1, i].Value;
+                        // 分割出X,Y坐标值
                         string[] fengge = Regex.Split(str1, ",", RegexOptions.IgnoreCase);
+#if DEBUG
                         Debug.Write(dgvRec.RowCount);
-                        Io_Api_hook.Mouse_move(Convert.ToInt32(fengge[0]), Convert.ToInt32(fengge[1]));
-                        if (dgvRec[2, i].Value is MouseButtons.Left  ) Io_Api_hook.Mouse_click();
-                        if (dgvRec[2, i].Value is MouseButtons.Right) Io_Api_hook.Mouse_click("R");
-                        if (dgvRec[2, i].Value is MouseButtons.Middle) Io_Api_hook.Mouse_click("M");
+#endif
 
-                        dgvRec.ClearSelection();
+                        dgvRec.ClearSelection(); //清空选择
                         dgvRec.Rows[i].Selected = true; // 设置被操作的行为选中
-                        // this.dgvRec.Rows[i].Cells[1].Value.ToString();
+                                                        // this.dgvRec.Rows[i].Cells[1].Value.ToString();
 
- 
-                        for (int j = 0; j <= Convert.ToInt32(dgvRec[3, i].Value);j++)
+                        // 耗时等待
+                        for (int j = 0; j <= Convert.ToInt32(dgvRec[3, i].Value); j++)
                         {
                             if (worker.CancellationPending is true)
                             {
@@ -364,6 +393,13 @@ namespace MouseRec_CSharp
                             }
                         }
 
+                        // 移动鼠标、点击鼠标
+                        Io_Api_hook.Mouse_move(Convert.ToInt32(fengge[0]), Convert.ToInt32(fengge[1]));
+                        if (dgvRec[2, i].Value is MouseButtons.Left) Io_Api_hook.Mouse_click();
+                        if (dgvRec[2, i].Value is MouseButtons.Right) Io_Api_hook.Mouse_click("R");
+                        if (dgvRec[2, i].Value is MouseButtons.Middle) Io_Api_hook.Mouse_click("M");
+
+
                     }
 
                 }
@@ -374,7 +410,7 @@ namespace MouseRec_CSharp
             catch (Exception ex)
             {
                 MetroMessageBox.Show(this, "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.HResult.ToString(), "出错啦！", MessageBoxButtons.OK, MessageBoxIcon.Error);
-           }
+            }
             finally
             {
                 // 终止键盘钩子
@@ -389,7 +425,7 @@ namespace MouseRec_CSharp
         /// <param name="e"></param>
         private void BgwRun_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            this.grpPreview.Text = "预览 == 距离下一操作等待时间百分比" + e.ProgressPercentage.ToString() + "%";
+            this.grpPreview.Text = "预览 == 操作等待时间百分比" + e.ProgressPercentage.ToString() + "%";
         }
         /// <summary>
         /// WorkerCompleted 完成事件
@@ -471,7 +507,7 @@ namespace MouseRec_CSharp
         /// <param name="e"></param>
         private void MetrocmsRec_Opening(object sender, CancelEventArgs e)
         {
-            if (Operators.ConditionalCompareObjectEqual(this.btnRecording.Tag, 1, false))
+            if (this.btnRecording.Tag is 1)
             {
                 this.btnRecording.Tag = 0;
                 this.btnRecording.Text = "停止中-再次点击录制";
@@ -481,7 +517,7 @@ namespace MouseRec_CSharp
             }
         }
         /// <summary>
-        /// 鼠标光标移动事件
+        /// 全局鼠标光标移动事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -509,6 +545,7 @@ namespace MouseRec_CSharp
 
                 m_GlobalHook.MouseClick += GlobalHookMouseClick;
                 m_GlobalHook.MouseMoveExt += GlobalHookMouseMoveExt;
+                m_GlobalHook.MouseDownExt += GlobalHookMouseDownExt;
                 m_GlobalHook.KeyDown += GlobalHookKeyDownExt;
                 return;
 
@@ -526,6 +563,7 @@ namespace MouseRec_CSharp
                 m_GlobalHook = Hook.GlobalEvents();
                 m_GlobalHook.MouseClick += GlobalHookMouseClick;
                 m_GlobalHook.MouseMoveExt += GlobalHookMouseMoveExt;
+                m_GlobalHook.MouseDownExt += GlobalHookMouseDownExt;
                 return;
             }
 
@@ -542,6 +580,7 @@ namespace MouseRec_CSharp
             {
                 m_GlobalHook.MouseClick -= GlobalHookMouseClick;
                 m_GlobalHook.MouseMoveExt -= GlobalHookMouseMoveExt;
+                m_GlobalHook.MouseDownExt -= GlobalHookMouseDownExt;
                 m_GlobalHook.KeyDown -= GlobalHookKeyDownExt;
 
                 //It is recommened to dispose it
@@ -560,6 +599,7 @@ namespace MouseRec_CSharp
             {
                 m_GlobalHook.MouseClick -= GlobalHookMouseClick;
                 m_GlobalHook.MouseMoveExt -= GlobalHookMouseMoveExt;
+                m_GlobalHook.MouseDownExt -= GlobalHookMouseDownExt;
                 return;
             }
 
@@ -581,16 +621,12 @@ namespace MouseRec_CSharp
             }
         }
         /// <summary>
-        /// 鼠标点击事件
+        /// 全局鼠标点击事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void GlobalHookMouseClick(object sender, MouseEventArgs e)
         {
-
-            // Console.WriteLine("MouseDown: \t{0}; \t System Timestamp: \t{1}", e.Button, e.Timestamp);
-            // uncommenting the following line will suppress the middle mouse button click
-            // if (e.Buttons == MouseButtons.Middle) { e.Handled = true; }
 
             // 判断屏幕坐标在程序窗体中不记录
             if (((MousePosition.X > Location.X) & (MousePosition.X < (Location.X + Width)) & (MousePosition.Y > Location.Y) & (MousePosition.Y < (Location.Y + Height)))) return;
@@ -610,8 +646,29 @@ namespace MouseRec_CSharp
                         int i = this.dgvRec.Rows.Add();
                         this.dgvRec.Rows[i].Cells[0].Value = i + 1;
                         this.dgvRec.Rows[i].Cells[1].Value = string.Format("{0},{1}", Control.MousePosition.X, Control.MousePosition.Y);
-                        this.dgvRec.Rows[i].Cells[2].Value = e.Button ;
-                        this.dgvRec.Rows[i].Cells[3].Value = this.nudSecond.Value ;
+                        this.dgvRec.Rows[i].Cells[2].Value = e.Button;
+                        if (nudSecond.Value == -1) // -1 则计算机器时间
+                        {
+                            // n2 为0设置默认值0
+                            if (numeric2_Timestamp == 0)
+                            {
+                                numeric2_Timestamp = numeric1_Timestamp - numeric1_Timestamp;
+
+                            }
+                            else
+                            {
+                                // n2 计算近似两个时间相差的秒
+                                numeric2_Timestamp = Math.Ceiling((Convert.ToDouble(numeric1_Timestamp) - Convert.ToDouble(numeric2_Timestamp)) / 1000);
+                            }
+                            // 写入时间
+                            this.dgvRec.Rows[i].Cells[3].Value = numeric2_Timestamp;
+                            // n2 重新赋值
+                            numeric2_Timestamp = numeric1_Timestamp;
+                        }
+                        else
+                        {
+                            this.dgvRec.Rows[i].Cells[3].Value = this.nudSecond.Value;
+                        }
                         // 依据id列倒序排序
                         this.dgvRec.Sort(this.dgvRec.Columns["id"], ListSortDirection.Descending);
                         break;
@@ -691,6 +748,68 @@ namespace MouseRec_CSharp
         {
             // 如已经实例化，卸载钩子
             if (m_GlobalHook != null) Unsubscribe();
+        }
+        /// <summary>
+        /// 右键菜单删除行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ToolStripMenuItemDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvRec.Rows.Count == 0) return;
+            int index = dgvRec.CurrentRow.Index;
+            dgvRec.Rows[index].Selected = true;
+            dgvRec.Rows.RemoveAt(index);
+            this.Addnum(this.dgvRec.Rows.Count);
+
+            try
+            {
+
+                XmlDocument document = new XmlDocument();//新建一个XML“编辑器”
+                if (xml_FilePath != null)//如果用户已读入xml文件，我们的任务就是修改这个xml文件了
+                {
+                    document.Load(xml_FilePath);
+                    XmlNode xmlElement_MouseRec = document.SelectSingleNode("MouseRec");//找到<class>作为根节点
+                    xmlElement_MouseRec.RemoveAll();//删除旗下所有节点
+                    int row = dgvRec.Rows.Count;//得到总行数    
+                    //int cell = dgvRec.Rows[1].Cells.Count;//得到总列数    
+                    for (int i = 0; i < row; i++)//遍历这个dataGridView
+                    {
+                        XmlElement xmlElement_event = document.CreateElement("event");
+                        XmlElement xmlElement_id = document.CreateElement("id");
+                        xmlElement_id.InnerText = this.dgvRec.Rows[i].Cells[0].Value.ToString();
+                        xmlElement_event.AppendChild(xmlElement_id);
+                        XmlElement xmlElement_position = document.CreateElement("position");
+                        xmlElement_position.InnerText = this.dgvRec.Rows[i].Cells[1].Value.ToString();
+                        xmlElement_event.AppendChild(xmlElement_position);
+                        XmlElement xmlElement_mousebutton = document.CreateElement("mousebutton");
+                        xmlElement_mousebutton.InnerText = this.dgvRec.Rows[i].Cells[2].Value.ToString();
+                        xmlElement_event.AppendChild(xmlElement_mousebutton);
+                        XmlElement xmlElement_interval = document.CreateElement("interval");
+                        xmlElement_interval.InnerText = this.dgvRec.Rows[i].Cells[3].Value.ToString();
+                        xmlElement_event.AppendChild(xmlElement_interval);
+                        xmlElement_MouseRec.AppendChild(xmlElement_event);
+                    }
+                    document.Save(xml_FilePath);//保存这个xml
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MetroMessageBox.Show(this, "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.HResult.ToString(), "出错啦！", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        /// <summary>
+        /// 全局鼠标按键按下事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)
+        {
+#if DEBUG
+            Console.WriteLine("MouseDown: \t{0}; \t System Timestamp: \t{1}", e.Button, e.Timestamp);
+#endif
+            numeric1_Timestamp = e.Timestamp;
         }
     }
 }

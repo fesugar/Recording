@@ -38,6 +38,8 @@
             this.ToolStripMenuItemExport = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemImport = new System.Windows.Forms.ToolStripMenuItem();
             this.MetrocmsRec = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.interval = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mousebutton = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,14 +86,14 @@
             // ToolStripMenuItemExport
             // 
             this.ToolStripMenuItemExport.Name = "ToolStripMenuItemExport";
-            this.ToolStripMenuItemExport.Size = new System.Drawing.Size(113, 24);
+            this.ToolStripMenuItemExport.Size = new System.Drawing.Size(128, 24);
             this.ToolStripMenuItemExport.Text = "保存记录";
             this.ToolStripMenuItemExport.Click += new System.EventHandler(this.ToolStripMenuItemExport_Click);
             // 
             // ToolStripMenuItemImport
             // 
             this.ToolStripMenuItemImport.Name = "ToolStripMenuItemImport";
-            this.ToolStripMenuItemImport.Size = new System.Drawing.Size(113, 24);
+            this.ToolStripMenuItemImport.Size = new System.Drawing.Size(128, 24);
             this.ToolStripMenuItemImport.Text = "载入记录";
             this.ToolStripMenuItemImport.Click += new System.EventHandler(this.ToolStripMenuItemImport_Click);
             // 
@@ -100,12 +102,26 @@
             this.MetrocmsRec.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MetrocmsRec.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItemImport,
-            this.ToolStripMenuItemExport});
+            this.ToolStripMenuItemExport,
+            this.toolStripSeparator1,
+            this.toolStripMenuItemDelete});
             this.MetrocmsRec.Name = "MetroContextMenu1";
             this.MetrocmsRec.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.MetrocmsRec.ShowImageMargin = false;
-            this.MetrocmsRec.Size = new System.Drawing.Size(114, 52);
+            this.MetrocmsRec.Size = new System.Drawing.Size(129, 82);
             this.MetrocmsRec.Opening += new System.ComponentModel.CancelEventHandler(this.MetrocmsRec_Opening);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(125, 6);
+            // 
+            // toolStripMenuItemDelete
+            // 
+            this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
+            this.toolStripMenuItemDelete.Size = new System.Drawing.Size(128, 24);
+            this.toolStripMenuItemDelete.Text = "删除选中行";
+            this.toolStripMenuItemDelete.Click += new System.EventHandler(this.ToolStripMenuItemDelete_Click);
             // 
             // interval
             // 
@@ -113,6 +129,7 @@
             this.interval.MinimumWidth = 6;
             this.interval.Name = "interval";
             this.interval.ReadOnly = true;
+            this.interval.Width = 101;
             // 
             // mousebutton
             // 
@@ -120,7 +137,7 @@
             this.mousebutton.MinimumWidth = 6;
             this.mousebutton.Name = "mousebutton";
             this.mousebutton.ReadOnly = true;
-            this.mousebutton.Width = 61;
+            this.mousebutton.Width = 62;
             // 
             // position
             // 
@@ -128,7 +145,7 @@
             this.position.MinimumWidth = 6;
             this.position.Name = "position";
             this.position.ReadOnly = true;
-            this.position.Width = 61;
+            this.position.Width = 62;
             // 
             // id
             // 
@@ -136,7 +153,7 @@
             this.id.MinimumWidth = 6;
             this.id.Name = "id";
             this.id.ReadOnly = true;
-            this.id.Width = 61;
+            this.id.Width = 62;
             // 
             // MetropnlState
             // 
@@ -158,6 +175,7 @@
             this.dgvRec.AllowUserToResizeRows = false;
             this.dgvRec.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvRec.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dgvRec.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvRec.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
@@ -182,14 +200,12 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvRec.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvRec.EnableHeadersVisualStyles = false;
             this.dgvRec.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.dgvRec.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.dgvRec.Location = new System.Drawing.Point(12, 310);
+            this.dgvRec.Location = new System.Drawing.Point(12, 312);
             this.dgvRec.MultiSelect = false;
             this.dgvRec.Name = "dgvRec";
             this.dgvRec.ReadOnly = true;
-            this.dgvRec.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -228,6 +244,7 @@
             this.llbExplain.TabStop = true;
             this.llbExplain.Text = "录制鼠标动作进行回放   - by  fesugar.com";
             this.llbExplain.UseCompatibleTextRendering = true;
+            this.llbExplain.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlbExplain_LinkClicked);
             // 
             // bgwRun
             // 
@@ -310,6 +327,11 @@
             0,
             0,
             0});
+            this.nudSecond.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.nudSecond.Name = "nudSecond";
             this.nudSecond.Size = new System.Drawing.Size(109, 25);
             this.nudSecond.TabIndex = 3;
@@ -427,6 +449,8 @@
         internal MetroFramework.Controls.MetroLabel lblCursorPosition;
         internal System.Windows.Forms.GroupBox grpExplain;
         internal System.Windows.Forms.GroupBox grpPreview;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelete;
     }
 }
 
