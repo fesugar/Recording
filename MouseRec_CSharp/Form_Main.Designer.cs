@@ -254,7 +254,6 @@
             // 
             // btnPlayback
             // 
-            this.btnPlayback.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPlayback.Location = new System.Drawing.Point(12, 126);
             this.btnPlayback.Name = "btnPlayback";
             this.btnPlayback.Size = new System.Drawing.Size(214, 31);
@@ -274,7 +273,6 @@
             // 
             // btnRecording
             // 
-            this.btnRecording.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRecording.Location = new System.Drawing.Point(12, 83);
             this.btnRecording.Name = "btnRecording";
             this.btnRecording.Size = new System.Drawing.Size(214, 30);
@@ -298,7 +296,6 @@
             // 
             // btnReset
             // 
-            this.btnReset.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReset.Location = new System.Drawing.Point(310, 20);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(70, 29);
@@ -321,6 +318,7 @@
             // 
             // nudSecond
             // 
+            this.nudSecond.Cursor = System.Windows.Forms.Cursors.Default;
             this.nudSecond.Location = new System.Drawing.Point(16, 82);
             this.nudSecond.Maximum = new decimal(new int[] {
             86400,
@@ -337,6 +335,7 @@
             this.nudSecond.TabIndex = 3;
             this.nudSecond.TabStop = false;
             this.nudSecond.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudSecond.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.nudSecond.Value = new decimal(new int[] {
             3,
             0,
@@ -403,7 +402,7 @@
             this.MaximizeBox = false;
             this.Name = "Form_Main";
             this.Opacity = 0.97D;
-            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.SystemShadow;
+            this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Style = MetroFramework.MetroColorStyle.Lime;
             this.Text = "鼠标动作录制工具";
             this.TopMost = true;

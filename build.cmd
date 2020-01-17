@@ -1,4 +1,6 @@
+
 @echo off
+
 color 17
 Title 生成CAB自解压独立程序
 :begin

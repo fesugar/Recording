@@ -1,11 +1,7 @@
 ﻿
 using System;
 
-using System.Collections.Generic;
-
 using System.Linq;
-
-using System.Text;
 
 using System.Runtime.InteropServices;
 
@@ -136,7 +132,7 @@ namespace Io_Api
 
 
 
-        
+
         /// <summary>
         /// 鼠标操作
         /// </summary>

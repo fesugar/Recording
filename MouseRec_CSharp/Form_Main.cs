@@ -1,6 +1,5 @@
 ﻿using Gma.System.MouseKeyHook;
 using MetroFramework;
-using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -55,8 +54,8 @@ namespace MouseRec_CSharp
             this.MetrotipAll.SetToolTip(this.btnPlayback, "~~回放录制的鼠标点击动作~~");
             this.MetrotipAll.SetToolTip(this.btnReset, "~~重置当前所有记录~~");
             this.MetrotipAll.SetToolTip(this.lblHotkey, "~~停止快捷热键~~");
-            this.MetrotipAll.SetToolTip(this.nudSecond, "~~设置每次鼠k标点击动作间隔时间~~");
-            this.MetrotipAll.SetToolTip(this.nudSecond, "~~设置每次鼠标点击动作间隔时间~~");
+            this.MetrotipAll.SetToolTip(this.chkLoop, "~~选中状态下会循环回放录制的动作~~");
+            this.MetrotipAll.SetToolTip(this.nudSecond, "~~设置每次鼠标点击动作间隔时间~~\n~~值为-1 时则自动计算间隔的时间~~");
             this.lblCountdown.Text = null;
             this.dgvRec.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
             this.dgvRec.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -78,7 +77,7 @@ namespace MouseRec_CSharp
             {
                 this.btnRecording.Tag = 1;
                 this.btnRecording.Text = "录制中-再次点击停止";
-                this.MetrolblState.Text = "状态：录制中... ...";
+                this.MetrolblState.Text = "状态:录制中... ...";
                 this.Subscribe(false, true);
                 this.btnPlayback.Enabled = false;
             }
@@ -87,7 +86,7 @@ namespace MouseRec_CSharp
             {
                 this.btnRecording.Tag = 0;
                 this.btnRecording.Text = "停止中-再次点击录制";
-                this.MetrolblState.Text = "状态：停止录制";
+                this.MetrolblState.Text = "状态:停止录制";
                 this.Unsubscribe(true, true);
                 this.btnPlayback.Enabled = true;
             }
@@ -121,7 +120,7 @@ namespace MouseRec_CSharp
                         // 复选框按钮设置不可用
                         this.chkLoop.Enabled = false;
                     }
-                    this.MetrolblState.Text = "状态：回放中... ...";
+                    this.MetrolblState.Text = "状态:回放中... ...";
                     if (!this.bgwRun.IsBusy)
                     {
                         this.bgwRun.RunWorkerAsync();
@@ -185,7 +184,7 @@ namespace MouseRec_CSharp
 
             this.bgwRun.WorkerReportsProgress = true;
             this.bgwRun.WorkerSupportsCancellation = true;
-            this.MetrolblState.Text = "状态：初始化完成";
+            this.MetrolblState.Text = "状态:初始化完成";
             // 循环勾选框置于未选中状态
             this.chkLoop.CheckState = CheckState.Unchecked;
 
@@ -265,7 +264,7 @@ namespace MouseRec_CSharp
             }
             catch (Exception ex)
             {
-                MetroMessageBox.Show(this, "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.HResult.ToString(), "出错啦！", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.TargetSite.ToString(), "出错啦！", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         /// <summary>
@@ -324,7 +323,7 @@ namespace MouseRec_CSharp
             }
             catch (Exception ex)
             {
-                MetroMessageBox.Show(this, "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.HResult.ToString(), "出错啦！", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.TargetSite.ToString(), "出错啦！", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -409,7 +408,7 @@ namespace MouseRec_CSharp
             }
             catch (Exception ex)
             {
-                MetroMessageBox.Show(this, "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.HResult.ToString(), "出错啦！", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.TargetSite.ToString(), "出错啦！", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -436,15 +435,15 @@ namespace MouseRec_CSharp
         {
             if (e.Cancelled)
             {
-                this.MetrolblState.Text = "状态： 已终止回放";
+                this.MetrolblState.Text = "状态: 已终止回放";
             }
             else if (e.Error != null)
             {
-                this.MetrolblState.Text = "状态： " + e.Error.Message;
+                this.MetrolblState.Text = "状态: " + e.Error.Message;
             }
             else
             {
-                this.MetrolblState.Text = "状态： 已完成回放";
+                this.MetrolblState.Text = "状态: 已完成回放";
             }
             this.btnPlayback.Text = "动作回放";
             this.btnPlayback.Tag = 0;
@@ -511,7 +510,7 @@ namespace MouseRec_CSharp
             {
                 this.btnRecording.Tag = 0;
                 this.btnRecording.Text = "停止中-再次点击录制";
-                this.MetrolblState.Text = "状态：停止录制";
+                this.MetrolblState.Text = "状态:停止录制";
                 this.Unsubscribe(true, true);
                 this.btnPlayback.Enabled = true;
             }
@@ -658,7 +657,7 @@ namespace MouseRec_CSharp
                             else
                             {
                                 // n2 计算近似两个时间相差的秒
-                                numeric2_Timestamp = Math.Ceiling((Convert.ToDouble(numeric1_Timestamp) - Convert.ToDouble(numeric2_Timestamp)) / 1000);
+                                numeric2_Timestamp = Math.Round((Convert.ToDouble(numeric1_Timestamp) - Convert.ToDouble(numeric2_Timestamp)) / 1000);
                             }
                             // 写入时间
                             this.dgvRec.Rows[i].Cells[3].Value = numeric2_Timestamp;
@@ -796,7 +795,7 @@ namespace MouseRec_CSharp
             }
             catch (Exception ex)
             {
-                MetroMessageBox.Show(this, "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.HResult.ToString(), "出错啦！", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.TargetSite.ToString(), "出错啦！", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         /// <summary>
