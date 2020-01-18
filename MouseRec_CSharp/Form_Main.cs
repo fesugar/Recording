@@ -1,4 +1,4 @@
-﻿using Gma.System.MouseKeyHook;
+using Gma.System.MouseKeyHook;
 using MetroFramework;
 using System;
 using System.ComponentModel;
@@ -202,8 +202,8 @@ namespace MouseRec_CSharp
             numeric2_Timestamp = 0;
 
             if (bgwRun.IsBusy)
-            { //检查到在异步任务，等待刷新，阻止还未停止，数据已清空异常
-                System.Threading.Thread.Sleep(1000);
+            { //检查到在异步任务，等待刷新，缓解还未停止，数据已清空异常
+                System.Threading.Thread.Sleep(100);
             }
             // 清空dgvRec数据
             this.dgvRec.Rows.Clear();
@@ -386,7 +386,7 @@ namespace MouseRec_CSharp
                             }
                             else
                             {
-                                System.Threading.Thread.Sleep(1000);
+                                System.Threading.Thread.Sleep(100);
                                 int percentComplete = (int)((float)j / (float)Convert.ToInt32(dgvRec[3, i].Value) * 100);
                                 worker.ReportProgress(percentComplete);
                             }
@@ -652,12 +652,11 @@ namespace MouseRec_CSharp
                             if (numeric2_Timestamp == 0)
                             {
                                 numeric2_Timestamp = numeric1_Timestamp - numeric1_Timestamp;
-
                             }
                             else
                             {
                                 // n2 计算近似两个时间相差的秒
-                                numeric2_Timestamp = Math.Round((Convert.ToDouble(numeric1_Timestamp) - Convert.ToDouble(numeric2_Timestamp)) / 1000);
+                                numeric2_Timestamp = Math.Round((Convert.ToDouble(numeric1_Timestamp) - Convert.ToDouble(numeric2_Timestamp)) / 100);
                             }
                             // 写入时间
                             this.dgvRec.Rows[i].Cells[3].Value = numeric2_Timestamp;
