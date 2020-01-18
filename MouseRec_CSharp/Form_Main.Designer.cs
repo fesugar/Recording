@@ -1,4 +1,4 @@
-﻿namespace MouseRec_CSharp
+namespace MouseRec_CSharp
 {
     partial class Form_Main
     {
@@ -40,10 +40,6 @@
             this.MetrocmsRec = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.interval = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mousebutton = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MetropnlState = new MetroFramework.Controls.MetroPanel();
             this.dgvRec = new System.Windows.Forms.DataGridView();
             this.lblHotkey = new MetroFramework.Controls.MetroLabel();
@@ -60,6 +56,10 @@
             this.lblCursorPosition = new MetroFramework.Controls.MetroLabel();
             this.grpExplain = new System.Windows.Forms.GroupBox();
             this.grpPreview = new System.Windows.Forms.GroupBox();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mousebutton = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.interval = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MetrocmsRec.SuspendLayout();
             this.MetropnlState.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRec)).BeginInit();
@@ -122,38 +122,6 @@
             this.toolStripMenuItemDelete.Size = new System.Drawing.Size(128, 24);
             this.toolStripMenuItemDelete.Text = "删除选中行";
             this.toolStripMenuItemDelete.Click += new System.EventHandler(this.ToolStripMenuItemDelete_Click);
-            // 
-            // interval
-            // 
-            this.interval.HeaderText = "间隔（秒）";
-            this.interval.MinimumWidth = 6;
-            this.interval.Name = "interval";
-            this.interval.ReadOnly = true;
-            this.interval.Width = 101;
-            // 
-            // mousebutton
-            // 
-            this.mousebutton.HeaderText = "按键";
-            this.mousebutton.MinimumWidth = 6;
-            this.mousebutton.Name = "mousebutton";
-            this.mousebutton.ReadOnly = true;
-            this.mousebutton.Width = 62;
-            // 
-            // position
-            // 
-            this.position.HeaderText = "坐标";
-            this.position.MinimumWidth = 6;
-            this.position.Name = "position";
-            this.position.ReadOnly = true;
-            this.position.Width = 62;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "序号";
-            this.id.MinimumWidth = 6;
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Width = 62;
             // 
             // MetropnlState
             // 
@@ -254,6 +222,7 @@
             // 
             // btnPlayback
             // 
+            this.btnPlayback.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPlayback.Location = new System.Drawing.Point(12, 126);
             this.btnPlayback.Name = "btnPlayback";
             this.btnPlayback.Size = new System.Drawing.Size(214, 31);
@@ -273,6 +242,7 @@
             // 
             // btnRecording
             // 
+            this.btnRecording.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRecording.Location = new System.Drawing.Point(12, 83);
             this.btnRecording.Name = "btnRecording";
             this.btnRecording.Size = new System.Drawing.Size(214, 30);
@@ -296,6 +266,7 @@
             // 
             // btnReset
             // 
+            this.btnReset.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReset.Location = new System.Drawing.Point(310, 20);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(70, 29);
@@ -321,7 +292,7 @@
             this.nudSecond.Cursor = System.Windows.Forms.Cursors.Default;
             this.nudSecond.Location = new System.Drawing.Point(16, 82);
             this.nudSecond.Maximum = new decimal(new int[] {
-            86400,
+            86400000,
             0,
             0,
             0});
@@ -337,19 +308,19 @@
             this.nudSecond.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nudSecond.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.nudSecond.Value = new decimal(new int[] {
-            3,
+            1,
             0,
             0,
-            0});
+            -2147483648});
             // 
             // lblInterval
             // 
             this.lblInterval.AutoSize = true;
             this.lblInterval.Location = new System.Drawing.Point(11, 54);
             this.lblInterval.Name = "lblInterval";
-            this.lblInterval.Size = new System.Drawing.Size(114, 20);
+            this.lblInterval.Size = new System.Drawing.Size(136, 20);
             this.lblInterval.TabIndex = 1;
-            this.lblInterval.Text = "间隔时间（秒）";
+            this.lblInterval.Text = "间隔时间（t/10秒）";
             // 
             // lblCursorPosition
             // 
@@ -384,6 +355,38 @@
             this.grpPreview.TabIndex = 12;
             this.grpPreview.TabStop = false;
             this.grpPreview.Text = "预览";
+            // 
+            // id
+            // 
+            this.id.HeaderText = "序号";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Width = 62;
+            // 
+            // position
+            // 
+            this.position.HeaderText = "坐标";
+            this.position.MinimumWidth = 6;
+            this.position.Name = "position";
+            this.position.ReadOnly = true;
+            this.position.Width = 62;
+            // 
+            // mousebutton
+            // 
+            this.mousebutton.HeaderText = "按键";
+            this.mousebutton.MinimumWidth = 6;
+            this.mousebutton.Name = "mousebutton";
+            this.mousebutton.ReadOnly = true;
+            this.mousebutton.Width = 62;
+            // 
+            // interval
+            // 
+            this.interval.HeaderText = "间隔 ( /10s )";
+            this.interval.MinimumWidth = 6;
+            this.interval.Name = "interval";
+            this.interval.ReadOnly = true;
+            this.interval.Width = 101;
             // 
             // Form_Main
             // 
@@ -428,10 +431,6 @@
         internal System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemExport;
         internal System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemImport;
         internal MetroFramework.Controls.MetroContextMenu MetrocmsRec;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn interval;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn mousebutton;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn position;
-        internal System.Windows.Forms.DataGridViewTextBoxColumn id;
         internal MetroFramework.Controls.MetroPanel MetropnlState;
         internal System.Windows.Forms.DataGridView dgvRec;
         internal MetroFramework.Controls.MetroLabel lblHotkey;
@@ -450,6 +449,10 @@
         internal System.Windows.Forms.GroupBox grpPreview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn position;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mousebutton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn interval;
     }
 }
 
