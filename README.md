@@ -15,3 +15,5 @@
   Windows 7 SP1, 
   Windows 8.1, 
   Windows 10 
+
+![鼠标动作录制工具](https://github.com/fesugar/Recording/raw/master/screen.JPG)
