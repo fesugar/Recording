@@ -1,9 +1,29 @@
-﻿Imports System.ComponentModel
+﻿#Region "版 本 注 释 "
+' ----------------------------------------------------------------
+' 项目名称 ：MouseRec_VB
+' 项目描述 ：Recording for VB.NET
+' 类 名 称 ：Form_Main
+' 类 描 述 ：主窗体
+' 命名空间 ：MouseRec_VB
+' CLR 版本 ：4.0
+' 作    者 ：fesugar
+' 邮    箱 ：fesugar@fesugar.com
+' 创建时间 ：12:42 2020/3/16
+' 更新时间 ：12:42 2020/3/16
+' 版 本 号 ：v1.0.0.0
+' 参考文献 ：
+' *****************************************************************
+' * Copyright @ fesugar 2020. All rights reserved.
+' *****************************************************************
+' ----------------------------------------------------------------*
+#End Region
+
+Imports System.ComponentModel
 Imports System.IO
 Imports System.Xml
 Imports System.Xml.Schema
 
-Public Class FormMain
+Public Class Form_Main
     ''' <summary>
     ''' 声明鼠标操作库
     ''' </summary>
@@ -226,7 +246,9 @@ NoWhile:
                 dgvRec.Rows(i).Selected = True ' 设置被操作的行为选中
                 dgvRec.FirstDisplayedScrollingRowIndex = i
 
-                For j = 0 To CInt(dgvRec.Item(3, i - 1).Value) 'i-1 用来修正已经执行完最后一个点击功能后，会继续循环一次设置的耗时，这个耗时是多余的
+                For j = 0 To CInt(dgvRec.Item(3, i - 1).Value)
+                    ' i-1 用来修正已经执行完最后一个点击功能后，
+                    ' 会继续循环一次设置的耗时， 这个耗时是多余的
                     If (worker.CancellationPending = True) Then
                         e.Cancel = True
                         Exit Sub

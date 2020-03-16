@@ -1,6 +1,24 @@
-﻿' 非常不容易才翻译过来的。
-' 博客: http://hi.baidu.com/clso
-' 论坛: http://clso.xuntan.com
+﻿#Region "版 本 注 释 "
+' ----------------------------------------------------------------
+' 项目名称 ：MouseRec_VB
+' 项目描述 ：Recording for VB.NET
+' 类 名 称 ：SystemHook
+' 类 描 述 ：钩子
+' 命名空间 ：MouseRec_VB
+' CLR 版本 ：4.0
+' 作    者 ：fesugar
+' 邮    箱 ：fesugar@fesugar.com
+' 创建时间 ：12:42 2020/3/16
+' 更新时间 ：12:42 2020/3/16
+' 版 本 号 ：v1.0.0.0
+' 参考文献 ：博客: http://hi.baidu.com/clso
+'            论坛: http://clso.xuntan.com
+' *****************************************************************
+' * Copyright @ fesugar 2020. All rights reserved.
+' *****************************************************************
+' ----------------------------------------------------------------*
+#End Region
+
 Imports System.Reflection, System.Threading, System.ComponentModel, System.Runtime.InteropServices
 ''' <summary>本类可以在.NET环境下使用系统键盘与鼠标钩子</summary>
 Public Class SystemHook
