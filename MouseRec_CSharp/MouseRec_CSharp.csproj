@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>$(SolutionDir)$(Configuration)\</OutputPath>
+    <OutputPath>$(SolutionDir)\bin\$(Configuration)\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -30,7 +30,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>$(SolutionDir)$(Configuration)\</OutputPath>
+    <OutputPath>$(SolutionDir)\bin\$(Configuration)\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -109,9 +109,9 @@
     <Content Include="MouseRec.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Io_Api\Io_Api.csproj">
+    <ProjectReference Include="..\MouseRec_Io_Api\MouseRec_Io_Api.csproj">
       <Project>{b7f328f7-8934-47c8-9c5c-e03e1878a491}</Project>
-      <Name>Io_Api</Name>
+      <Name>MouseRec_Io_Api</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

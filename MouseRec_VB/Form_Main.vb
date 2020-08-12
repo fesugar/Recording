@@ -13,7 +13,7 @@
 ' 版 本 号 ：v1.0.0.0
 ' 参考文献 ：
 ' *****************************************************************
-' * Copyright @ fesugar 2020. All rights reserved.
+' * Copyright @ fesugar.com 2020. All rights reserved.
 ' *****************************************************************
 ' ----------------------------------------------------------------*
 #End Region
@@ -519,7 +519,7 @@ NoWhile:
             End If
 
             Dim f = New OpenFileDialog With {
-                .Multiselect = False '单选         
+                .Multiselect = False
                 }
             If f.ShowDialog() = DialogResult.OK Then
                 ' Dim filepath = f.FileName '文件路径  
@@ -568,7 +568,8 @@ NoWhile:
     End Sub
 
     REM 验证  xsd 开始
-    REM https://docs.microsoft.com/zh-cn/dotnet/api/system.xml.schema.extensions.validate?redirectedfrom=MSDN&view=netframework-4.8
+    REM https://docs.microsoft.com/zh-cn/dotnet/api/system.xml.schema.extensions.validate?redirectedfrom=MSDN&view=netframework-4.8
+
     Dim errors As Boolean = False
 
     Private Sub XSDErrors(ByVal o As Object, ByVal e As ValidationEventArgs)

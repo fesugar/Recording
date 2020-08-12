@@ -118,7 +118,7 @@ Partial Class Form_Main
         Me.nudSecond.TabIndex = 3
         Me.nudSecond.TabStop = False
         Me.nudSecond.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.nudSecond.Value = New Decimal(New Integer() {3, 0, 0, 0})
+        Me.nudSecond.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblInterval
         '
@@ -333,7 +333,7 @@ Partial Class Form_Main
         Me.MetrotipAll.StyleManager = Nothing
         Me.MetrotipAll.Theme = MetroFramework.MetroThemeStyle.Light
         '
-        'FormMain
+        'Form_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -348,7 +348,7 @@ Partial Class Form_Main
         Me.Controls.Add(Me.grpPreview)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.Name = "FormMain"
+        Me.Name = "Form_Main"
         Me.Opacity = 0.97R
         Me.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow
         Me.Style = MetroFramework.MetroColorStyle.Lime

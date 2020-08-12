@@ -34,7 +34,7 @@ echo [Strings] >>%pt%MouseRec.SED
 echo InstallPrompt=^ >>%pt%MouseRec.SED
 echo DisplayLicense=^ >>%pt%MouseRec.SED
 echo FinishMessage=^ >>%pt%MouseRec.SED
-echo TargetName=%pt%bin\Setup\MouseRec.v1.22.EXE >>%pt%MouseRec.SED
+echo TargetName=%pt%bin\build\Setup\MouseRec.v1.22.EXE >>%pt%MouseRec.SED
 echo FriendlyName=^MouseRec >>%pt%MouseRec.SED
 echo AppLaunched=^MouseRec.exe >>%pt%MouseRec.SED
 echo PostInstallCmd=^<None^> >>%pt%MouseRec.SED
@@ -43,13 +43,11 @@ echo UserQuietInstCmd=^ >>%pt%MouseRec.SED
 echo FILE0=^"Licenses.txt^" >>%pt%MouseRec.SED
 echo FILE1=^"MouseRec.exe^" >>%pt%MouseRec.SED
 echo FILE2=^"MouseRec.exe.config^" >>%pt%MouseRec.SED
-echo FILE3=^"MouseRec.pdb^" >>%pt%MouseRec.SED
-echo FILE4=^"MouseRec.xml^" >>%pt%MouseRec.SED
-echo FILE5=^"NDP462.cmd^" >>%pt%MouseRec.SED
-echo FILE6=^"NDP462.exe^" >>%pt%MouseRec.SED
-echo FILE7=^"readme.rtf^" >>%pt%MouseRec.SED
+echo FILE3=^"NDP462.cmd^" >>%pt%MouseRec.SED
+echo FILE4=^"NDP462.exe^" >>%pt%MouseRec.SED
+echo FILE5=^"readme.rtf^" >>%pt%MouseRec.SED
 echo [SourceFiles] >>%pt%MouseRec.SED
-echo SourceFiles0=%pt%bin\ >>%pt%MouseRec.SED
+echo SourceFiles0=%pt%bin\build\ >>%pt%MouseRec.SED
 echo [SourceFiles0] >>%pt%MouseRec.SED
 echo %%FILE0%%=^ >>%pt%MouseRec.SED
 echo %%FILE1%%=^ >>%pt%MouseRec.SED
@@ -57,8 +55,7 @@ echo %%FILE2%%=^ >>%pt%MouseRec.SED
 echo %%FILE3%%=^ >>%pt%MouseRec.SED
 echo %%FILE4%%=^ >>%pt%MouseRec.SED
 echo %%FILE5%%=^ >>%pt%MouseRec.SED
-echo %%FILE6%%=^ >>%pt%MouseRec.SED
-echo %%FILE7%%=^ >>%pt%MouseRec.SED
+
 goto end
 
 REM 生成SED脚本 for cs
@@ -89,7 +86,7 @@ echo [Strings] >>%pt%MouseRec.SED
 echo InstallPrompt=^ >>%pt%MouseRec.SED
 echo DisplayLicense=^ >>%pt%MouseRec.SED
 echo FinishMessage=^ >>%pt%MouseRec.SED
-echo TargetName=%pt%bin\Setup\MouseRec.v1.22.EXE >>%pt%MouseRec.SED
+echo TargetName=%pt%bin\build\Setup\MouseRec.v1.22.EXE >>%pt%MouseRec.SED
 echo FriendlyName=^MouseRec >>%pt%MouseRec.SED
 echo AppLaunched=^MouseRec.exe >>%pt%MouseRec.SED
 echo PostInstallCmd=^<None^> >>%pt%MouseRec.SED
@@ -100,7 +97,7 @@ echo FILE1=^"MouseRec.exe^" >>%pt%MouseRec.SED
 echo FILE2=^"MouseRec.exe.config^" >>%pt%MouseRec.SED
 echo FILE3=^"readme.rtf^" >>%pt%MouseRec.SED
 echo [SourceFiles] >>%pt%MouseRec.SED
-echo SourceFiles0=%pt%bin\ >>%pt%MouseRec.SED
+echo SourceFiles0=%pt%bin\build\ >>%pt%MouseRec.SED
 echo [SourceFiles0] >>%pt%MouseRec.SED
 echo %%FILE0%%=^ >>%pt%MouseRec.SED
 echo %%FILE1%%=^ >>%pt%MouseRec.SED

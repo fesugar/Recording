@@ -13,7 +13,7 @@
 * 版 本 号 ：v1.0.0.0
 * 参考文献 ：
 *******************************************************************
-* Copyright @ fesugar 2020. All rights reserved.
+* Copyright @ fesugar.com 2020. All rights reserved.
 *******************************************************************
 //----------------------------------------------------------------*/
 #endregion
@@ -90,7 +90,7 @@ namespace MouseRec_CSharp
         private void BtnRecording_Click(object sender, EventArgs e)
         {
             // 如已经在回放中状态，退出，不执行
-            if (Convert.ToInt32(btnPlayback.Tag) == 1) return;
+            if (Convert.ToInt16(btnPlayback.Tag) == 1) return;
 
             // 检测录制按钮未在录制中
             if (Convert.ToInt16(this.btnRecording.Tag) == 0)
@@ -377,7 +377,7 @@ namespace MouseRec_CSharp
                     for (int i = dgvRec.RowCount - 1; i >= 0; i += -1)
                     {
                         // 监测是否有取消任务
-                        if (worker.CancellationPending is true)
+                        if (worker.CancellationPending)
                         {
                             // 如有任务终止任务
                             e.Cancel = true;
@@ -394,12 +394,12 @@ namespace MouseRec_CSharp
 
                         dgvRec.ClearSelection(); //清空选择
                         dgvRec.Rows[i].Selected = true; // 设置被操作的行为选中
-                                                        // this.dgvRec.Rows[i].Cells[1].Value.ToString();
+                        // this.dgvRec.Rows[i].Cells[1].Value.ToString();
 
                         // 耗时等待
                         for (int j = 0; j <= Convert.ToInt32(dgvRec[3, i].Value); j++)
                         {
-                            if (worker.CancellationPending is true)
+                            if (worker.CancellationPending)
                             {
                                 e.Cancel = true;
                                 return;
@@ -414,9 +414,10 @@ namespace MouseRec_CSharp
 
                         // 移动鼠标、点击鼠标
                         Io_Api_hook.Mouse_move(Convert.ToInt32(fengge[0]), Convert.ToInt32(fengge[1]));
-                        if (dgvRec[2, i].Value is MouseButtons.Left) Io_Api_hook.Mouse_click();
-                        if (dgvRec[2, i].Value is MouseButtons.Right) Io_Api_hook.Mouse_click("R");
-                        if (dgvRec[2, i].Value is MouseButtons.Middle) Io_Api_hook.Mouse_click("M");
+                        string obj_value = Convert.ToString(this.dgvRec[2, i].Value);
+                        if (obj_value == Convert.ToString(MouseButtons.Left)) Io_Api_hook.Mouse_click();
+                        if (obj_value == Convert.ToString(MouseButtons.Right)) Io_Api_hook.Mouse_click("R");
+                        if (obj_value == Convert.ToString(MouseButtons.Middle)) Io_Api_hook.Mouse_click("M");
 
 
                     }
@@ -526,7 +527,7 @@ namespace MouseRec_CSharp
         /// <param name="e"></param>
         private void MetrocmsRec_Opening(object sender, CancelEventArgs e)
         {
-            if (this.btnRecording.Tag is 1)
+            if (Convert.ToInt32(this.btnRecording.Tag) == 1)
             {
                 this.btnRecording.Tag = 0;
                 this.btnRecording.Text = "停止中-再次点击录制";
@@ -557,7 +558,7 @@ namespace MouseRec_CSharp
         {
 
             // 键盘鼠标都安装
-            if (InstallKeyboardHook is true && InstallMouseHook is true)
+            if (InstallKeyboardHook && InstallMouseHook)
             {
                 // Note: for the application hook, use the Hook.AppEvents() instead
                 m_GlobalHook = Hook.GlobalEvents();
@@ -570,14 +571,14 @@ namespace MouseRec_CSharp
 
             }
             // 只安装按键
-            if (InstallMouseHook is false && InstallKeyboardHook is true)
+            if (!InstallMouseHook && InstallKeyboardHook)
             {
                 m_GlobalHook = Hook.GlobalEvents();
                 m_GlobalHook.KeyDown += GlobalHookKeyDownExt;
                 return;
             }
             // 只安装鼠标
-            if (InstallKeyboardHook is false && InstallMouseHook is true)
+            if (!InstallKeyboardHook && InstallMouseHook)
             {
                 m_GlobalHook = Hook.GlobalEvents();
                 m_GlobalHook.MouseClick += GlobalHookMouseClick;
@@ -595,7 +596,7 @@ namespace MouseRec_CSharp
         public void Unsubscribe(bool UninstallKeyboardHook = true, bool UninstallMouseHook = true)
         {
             // 键盘鼠标都卸载
-            if (UninstallMouseHook is true && UninstallKeyboardHook is true)
+            if (UninstallMouseHook && UninstallKeyboardHook)
             {
                 m_GlobalHook.MouseClick -= GlobalHookMouseClick;
                 m_GlobalHook.MouseMoveExt -= GlobalHookMouseMoveExt;
@@ -608,13 +609,13 @@ namespace MouseRec_CSharp
             }
 
             // 只卸载按键
-            if (UninstallMouseHook is false && UninstallKeyboardHook is true)
+            if (!UninstallMouseHook && UninstallKeyboardHook)
             {
                 m_GlobalHook.KeyDown -= GlobalHookKeyDownExt;
                 return;
             }
             // 只卸载鼠标
-            if (UninstallKeyboardHook is false && UninstallMouseHook is true)
+            if (!UninstallKeyboardHook && UninstallMouseHook)
             {
                 m_GlobalHook.MouseClick -= GlobalHookMouseClick;
                 m_GlobalHook.MouseMoveExt -= GlobalHookMouseMoveExt;
@@ -790,7 +791,7 @@ namespace MouseRec_CSharp
                     XmlNode xmlElement_MouseRec = document.SelectSingleNode("MouseRec");//找到<class>作为根节点
                     xmlElement_MouseRec.RemoveAll();//删除旗下所有节点
                     int row = dgvRec.Rows.Count;//得到总行数    
-                    //int cell = dgvRec.Rows[1].Cells.Count;//得到总列数    
+                                                //int cell = dgvRec.Rows[1].Cells.Count;//得到总列数    
                     for (int i = 0; i < row; i++)//遍历这个dataGridView
                     {
                         XmlElement xmlElement_event = document.CreateElement("event");

@@ -14,7 +14,7 @@
 ' 参考文献 ：博客: http://hi.baidu.com/clso
 '            论坛: http://clso.xuntan.com
 ' *****************************************************************
-' * Copyright @ fesugar 2020. All rights reserved.
+' * Copyright @ fesugar.com 2020. All rights reserved.
 ' *****************************************************************
 ' ----------------------------------------------------------------*
 #End Region
