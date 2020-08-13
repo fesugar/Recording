@@ -45,8 +45,8 @@ namespace MouseRec_CSharp
         /// <summary>
         /// 间隔时间
         /// </summary>
-        private double numeric1_Timestamp;
-        private double numeric2_Timestamp;
+        private double numericsSart_Timestamp;
+        private double numericEnd_Timestamp;
         /// <summary>
         /// 定义委托
         /// </summary>
@@ -61,6 +61,10 @@ namespace MouseRec_CSharp
         {
             // 初始化设计器的代码
             InitializeComponent();
+
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景. 
+            SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲 
         }
         /// <summary>
         /// 主窗体载入时事件
@@ -218,8 +222,8 @@ namespace MouseRec_CSharp
             xml_FilePath = null;
             toolStripMenuItemDelete.Text = "删除选中行";
             // 重设时间
-            numeric1_Timestamp = 0;
-            numeric2_Timestamp = 0;
+            numericsSart_Timestamp = 0;
+            numericEnd_Timestamp = 0;
 
             if (bgwRun.IsBusy)
             { //检查到在异步任务，等待刷新，缓解还未停止，数据已清空异常
@@ -360,11 +364,11 @@ namespace MouseRec_CSharp
 
 
                 this.Djs("③");
-                System.Threading.Thread.Sleep(800);
+                System.Threading.Thread.Sleep(500);
                 this.Djs("②");
-                System.Threading.Thread.Sleep(800);
+                System.Threading.Thread.Sleep(500);
                 this.Djs("①");
-                System.Threading.Thread.Sleep(800);
+                System.Threading.Thread.Sleep(500);
                 this.Djs(null);
 
                 BackgroundWorker worker = sender as BackgroundWorker;
@@ -670,19 +674,19 @@ namespace MouseRec_CSharp
                         if (nudSecond.Value == -1) // -1 则计算机器时间
                         {
                             // n2 为0设置默认值0
-                            if (numeric2_Timestamp == 0)
+                            if (numericEnd_Timestamp == 0)
                             {
-                                numeric2_Timestamp = numeric1_Timestamp - numeric1_Timestamp;
+                                numericEnd_Timestamp = numericsSart_Timestamp - numericsSart_Timestamp;
                             }
                             else
                             {
                                 // n2 计算近似两个时间相差的秒
-                                numeric2_Timestamp = Math.Round((Convert.ToDouble(numeric1_Timestamp) - Convert.ToDouble(numeric2_Timestamp)) / 100);
+                                numericEnd_Timestamp = Math.Round((Convert.ToDouble(numericsSart_Timestamp) - Convert.ToDouble(numericEnd_Timestamp)) / 100);
                             }
                             // 写入时间
-                            this.dgvRec.Rows[i].Cells[3].Value = numeric2_Timestamp;
+                            this.dgvRec.Rows[i].Cells[3].Value = numericEnd_Timestamp;
                             // n2 重新赋值
-                            numeric2_Timestamp = numeric1_Timestamp;
+                            numericEnd_Timestamp = numericsSart_Timestamp;
                         }
                         else
                         {
@@ -828,7 +832,23 @@ namespace MouseRec_CSharp
 #if DEBUG
             Console.WriteLine("MouseDown: \t{0}; \t System Timestamp: \t{1}", e.Button, e.Timestamp);
 #endif
-            numeric1_Timestamp = e.Timestamp;
+            numericsSart_Timestamp = e.Timestamp;
         }
+
+
+        /// <summary>
+        /// 修复最大化闪烁和黑块问题
+        /// https://blog.csdn.net/qq_25465525/article/details/88739837?
+        /// </summary>
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000; // Turn on WS_EX_COMPOSITED
+                return cp;
+            }
+        }
+
     }
 }
