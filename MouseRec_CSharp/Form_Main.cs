@@ -65,6 +65,10 @@ namespace MouseRec_CSharp
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景. 
             SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲 
+#if DEBUG
+            // build time
+            Console.WriteLine(System.IO.File.GetLastWriteTime(this.GetType().Assembly.Location));
+#endif
         }
         /// <summary>
         /// 主窗体载入时事件
@@ -85,6 +89,12 @@ namespace MouseRec_CSharp
             this.dgvRec.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
             this.dgvRec.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
             this.dgvRec.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            //about initia
+            pl_about.Visible = false;
+            lbl_buildtime.Text += System.IO.File.GetLastWriteTime(this.GetType().Assembly.Location);
+            lbl_author.Text += "严圣川";
+            lbl_prpe.Text += @"https://github.com/fesugar/Recording";
         }
         /// <summary>
         /// 录制按钮单击事件
@@ -849,6 +859,23 @@ namespace MouseRec_CSharp
                 return cp;
             }
         }
-
+        /// <summary>
+        /// about 标签鼠标进入控件事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void metroLink_about_MouseEnter(object sender, EventArgs e)
+        {
+            pl_about.Visible = true;
+        }
+        /// <summary>
+        /// about 标签鼠标离开控件事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void metroLink_about_MouseLeave(object sender, EventArgs e)
+        {
+            pl_about.Visible = false;
+        }
     }
 }
