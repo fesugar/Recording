@@ -86,7 +86,7 @@ echo [Strings] >>%pt%MouseRec.SED
 echo InstallPrompt=^ >>%pt%MouseRec.SED
 echo DisplayLicense=^ >>%pt%MouseRec.SED
 echo FinishMessage=^ >>%pt%MouseRec.SED
-echo TargetName=%pt%bin\build\Setup\MouseRec.v1.22.EXE >>%pt%MouseRec.SED
+echo TargetName=%pt%bin\build\Setup\MouseRec1255.EXE >>%pt%MouseRec.SED
 echo FriendlyName=^MouseRec >>%pt%MouseRec.SED
 echo AppLaunched=^MouseRec.exe >>%pt%MouseRec.SED
 echo PostInstallCmd=^<None^> >>%pt%MouseRec.SED

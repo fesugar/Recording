@@ -42,10 +42,6 @@ namespace MouseRec_CSharp
             this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.MetropnlState = new MetroFramework.Controls.MetroPanel();
             this.dgvRec = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mousebutton = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.interval = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblHotkey = new MetroFramework.Controls.MetroLabel();
             this.llbExplain = new System.Windows.Forms.LinkLabel();
             this.bgwRun = new System.ComponentModel.BackgroundWorker();
@@ -70,6 +66,11 @@ namespace MouseRec_CSharp
             this.pic_Alipay = new System.Windows.Forms.PictureBox();
             this.lbl_author = new System.Windows.Forms.Label();
             this.lbl_buildtime = new System.Windows.Forms.Label();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mousebutton = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doubleclick = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.interval = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MetrocmsRec.SuspendLayout();
             this.MetropnlState.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRec)).BeginInit();
@@ -172,6 +173,7 @@ namespace MouseRec_CSharp
             this.id,
             this.position,
             this.mousebutton,
+            this.doubleclick,
             this.interval});
             this.dgvRec.ContextMenuStrip = this.MetrocmsRec;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -204,38 +206,6 @@ namespace MouseRec_CSharp
             this.dgvRec.Size = new System.Drawing.Size(401, 147);
             this.dgvRec.TabIndex = 18;
             this.dgvRec.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.DgvRec_UserDeletedRow);
-            // 
-            // id
-            // 
-            this.id.HeaderText = "序号";
-            this.id.MinimumWidth = 6;
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Width = 62;
-            // 
-            // position
-            // 
-            this.position.HeaderText = "坐标";
-            this.position.MinimumWidth = 6;
-            this.position.Name = "position";
-            this.position.ReadOnly = true;
-            this.position.Width = 62;
-            // 
-            // mousebutton
-            // 
-            this.mousebutton.HeaderText = "按键";
-            this.mousebutton.MinimumWidth = 6;
-            this.mousebutton.Name = "mousebutton";
-            this.mousebutton.ReadOnly = true;
-            this.mousebutton.Width = 62;
-            // 
-            // interval
-            // 
-            this.interval.HeaderText = "间隔 ( /10s )";
-            this.interval.MinimumWidth = 6;
-            this.interval.Name = "interval";
-            this.interval.ReadOnly = true;
-            this.interval.Width = 101;
             // 
             // lblHotkey
             // 
@@ -505,6 +475,46 @@ namespace MouseRec_CSharp
             this.lbl_buildtime.TabIndex = 0;
             this.lbl_buildtime.Text = "Build time:";
             // 
+            // id
+            // 
+            this.id.HeaderText = "序号";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Width = 62;
+            // 
+            // position
+            // 
+            this.position.HeaderText = "坐标";
+            this.position.MinimumWidth = 6;
+            this.position.Name = "position";
+            this.position.ReadOnly = true;
+            this.position.Width = 62;
+            // 
+            // mousebutton
+            // 
+            this.mousebutton.HeaderText = "按键";
+            this.mousebutton.MinimumWidth = 6;
+            this.mousebutton.Name = "mousebutton";
+            this.mousebutton.ReadOnly = true;
+            this.mousebutton.Width = 62;
+            // 
+            // doubleclick
+            // 
+            this.doubleclick.HeaderText = "双击";
+            this.doubleclick.MinimumWidth = 6;
+            this.doubleclick.Name = "doubleclick";
+            this.doubleclick.ReadOnly = true;
+            this.doubleclick.Width = 62;
+            // 
+            // interval
+            // 
+            this.interval.HeaderText = "间隔 ( /10s )";
+            this.interval.MinimumWidth = 6;
+            this.interval.Name = "interval";
+            this.interval.ReadOnly = true;
+            this.interval.Width = 101;
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -551,34 +561,8 @@ namespace MouseRec_CSharp
         }
 
         #endregion
-
-        internal MetroFramework.Components.MetroToolTip MetrotipAll;
-        internal MetroFramework.Controls.MetroLabel MetrolblState;
-        internal System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemExport;
-        internal System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemImport;
-        internal MetroFramework.Controls.MetroContextMenu MetrocmsRec;
-        internal MetroFramework.Controls.MetroPanel MetropnlState;
-        internal System.Windows.Forms.DataGridView dgvRec;
-        internal MetroFramework.Controls.MetroLabel lblHotkey;
-        internal System.Windows.Forms.LinkLabel llbExplain;
-        internal System.ComponentModel.BackgroundWorker bgwRun;
-        internal MetroFramework.Controls.MetroButton btnPlayback;
-        internal MetroFramework.Controls.MetroLabel lblLog;
-        internal MetroFramework.Controls.MetroButton btnRecording;
-        internal System.Windows.Forms.Label lblCountdown;
-        internal MetroFramework.Controls.MetroButton btnReset;
-        internal MetroFramework.Controls.MetroCheckBox chkLoop;
-        internal System.Windows.Forms.NumericUpDown nudSecond;
-        internal MetroFramework.Controls.MetroLabel lblInterval;
-        internal MetroFramework.Controls.MetroLabel lblCursorPosition;
-        internal System.Windows.Forms.GroupBox grpExplain;
-        internal System.Windows.Forms.GroupBox grpPreview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelete;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn position;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mousebutton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn interval;
         private MetroFramework.Controls.MetroLink metroLink_about;
         private System.Windows.Forms.Panel pl_about;
         private System.Windows.Forms.Label lbl_prpe;
@@ -589,6 +573,32 @@ namespace MouseRec_CSharp
         private System.Windows.Forms.PictureBox pic_Alipay;
         private System.Windows.Forms.Label lbl_author;
         private System.Windows.Forms.Label lbl_buildtime;
+        private MetroFramework.Components.MetroToolTip MetrotipAll;
+        private MetroFramework.Controls.MetroLabel MetrolblState;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemExport;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemImport;
+        private MetroFramework.Controls.MetroContextMenu MetrocmsRec;
+        private MetroFramework.Controls.MetroPanel MetropnlState;
+        private System.Windows.Forms.DataGridView dgvRec;
+        private MetroFramework.Controls.MetroLabel lblHotkey;
+        private System.Windows.Forms.LinkLabel llbExplain;
+        private System.ComponentModel.BackgroundWorker bgwRun;
+        private MetroFramework.Controls.MetroButton btnPlayback;
+        private MetroFramework.Controls.MetroLabel lblLog;
+        private MetroFramework.Controls.MetroButton btnRecording;
+        private System.Windows.Forms.Label lblCountdown;
+        private MetroFramework.Controls.MetroButton btnReset;
+        private MetroFramework.Controls.MetroCheckBox chkLoop;
+        private System.Windows.Forms.NumericUpDown nudSecond;
+        private MetroFramework.Controls.MetroLabel lblInterval;
+        private MetroFramework.Controls.MetroLabel lblCursorPosition;
+        private System.Windows.Forms.GroupBox grpExplain;
+        private System.Windows.Forms.GroupBox grpPreview;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn position;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mousebutton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn doubleclick;
+        private System.Windows.Forms.DataGridViewTextBoxColumn interval;
     }
 }
 

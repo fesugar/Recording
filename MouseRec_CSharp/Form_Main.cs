@@ -256,6 +256,7 @@ namespace MouseRec_CSharp
                 {
                     OpenFileDialog dialog = new OpenFileDialog
                     {
+                        Filter = "XML数据 (*.xml)|*.xml|所有文件(*.*)|*>**",
                         Multiselect = false
                     };
                     if (dialog.ShowDialog() == DialogResult.OK)
@@ -281,6 +282,7 @@ namespace MouseRec_CSharp
                                 this.dgvRec.Rows[index].Cells[1].Value = xmlElement.ChildNodes.Item(1).InnerText;
                                 this.dgvRec.Rows[index].Cells[2].Value = xmlElement.ChildNodes.Item(2).InnerText;
                                 this.dgvRec.Rows[index].Cells[3].Value = xmlElement.ChildNodes.Item(3).InnerText;
+                                this.dgvRec.Rows[index].Cells[4].Value = xmlElement.ChildNodes.Item(4).InnerText;
                             }
 
                             this.BtnRecording_Click(this, e);   // 操作录制按钮更改回放按钮状态
@@ -339,8 +341,11 @@ namespace MouseRec_CSharp
                             XmlElement xmlElement_mousebutton = document.CreateElement("mousebutton");
                             xmlElement_mousebutton.InnerText = this.dgvRec.Rows[i].Cells[2].Value.ToString();
                             xmlElement_event.AppendChild(xmlElement_mousebutton);
+                            XmlElement xmlElement_doubleclick = document.CreateElement("doubleclick");
+                            xmlElement_doubleclick.InnerText = this.dgvRec.Rows[i].Cells[3].Value.ToString();
+                            xmlElement_event.AppendChild(xmlElement_doubleclick);
                             XmlElement xmlElement_interval = document.CreateElement("interval");
-                            xmlElement_interval.InnerText = this.dgvRec.Rows[i].Cells[3].Value.ToString();
+                            xmlElement_interval.InnerText = this.dgvRec.Rows[i].Cells[4].Value.ToString();
                             xmlElement_event.AppendChild(xmlElement_interval);
                             xmlElement_MouseRec.AppendChild(xmlElement_event);
                         }
@@ -411,7 +416,7 @@ namespace MouseRec_CSharp
                         // this.dgvRec.Rows[i].Cells[1].Value.ToString();
 
                         // 耗时等待
-                        for (int j = 0; j <= Convert.ToInt32(dgvRec[3, i].Value); j++)
+                        for (int j = 0; j <= Convert.ToInt32(dgvRec[4, i].Value); j++)
                         {
                             if (worker.CancellationPending)
                             {
@@ -421,7 +426,7 @@ namespace MouseRec_CSharp
                             else
                             {
                                 System.Threading.Thread.Sleep(100);
-                                int percentComplete = (int)((float)j / (float)Convert.ToInt32(dgvRec[3, i].Value) * 100);
+                                int percentComplete = (int)((float)j / (float)Convert.ToInt32(dgvRec[4, i].Value) * 100);
                                 worker.ReportProgress(percentComplete);
                             }
                         }
@@ -429,10 +434,9 @@ namespace MouseRec_CSharp
                         // 移动鼠标、点击鼠标
                         Io_Api_hook.Mouse_move(Convert.ToInt32(fengge[0]), Convert.ToInt32(fengge[1]));
                         string obj_value = Convert.ToString(this.dgvRec[2, i].Value);
-                        if (obj_value == Convert.ToString(MouseButtons.Left)) Io_Api_hook.Mouse_click();
-                        if (obj_value == Convert.ToString(MouseButtons.Right)) Io_Api_hook.Mouse_click("R");
-                        if (obj_value == Convert.ToString(MouseButtons.Middle)) Io_Api_hook.Mouse_click("M");
-
+                        if (obj_value == Convert.ToString(MouseButtons.Left)) Io_Api_hook.Mouse_click("L", Convert.ToBoolean(this.dgvRec[3, i].Value));
+                        if (obj_value == Convert.ToString(MouseButtons.Right)) Io_Api_hook.Mouse_click("R", Convert.ToBoolean(this.dgvRec[3, i].Value));
+                        if (obj_value == Convert.ToString(MouseButtons.Middle)) Io_Api_hook.Mouse_click("M", Convert.ToBoolean(this.dgvRec[3, i].Value));
 
                     }
 
@@ -578,6 +582,7 @@ namespace MouseRec_CSharp
                 m_GlobalHook = Hook.GlobalEvents();
 
                 m_GlobalHook.MouseClick += GlobalHookMouseClick;
+                m_GlobalHook.MouseDoubleClick += GlobalHookMouseClick;
                 m_GlobalHook.MouseMoveExt += GlobalHookMouseMoveExt;
                 m_GlobalHook.MouseDownExt += GlobalHookMouseDownExt;
                 m_GlobalHook.KeyDown += GlobalHookKeyDownExt;
@@ -596,12 +601,14 @@ namespace MouseRec_CSharp
             {
                 m_GlobalHook = Hook.GlobalEvents();
                 m_GlobalHook.MouseClick += GlobalHookMouseClick;
+                m_GlobalHook.MouseDoubleClick += GlobalHookMouseClick;
                 m_GlobalHook.MouseMoveExt += GlobalHookMouseMoveExt;
                 m_GlobalHook.MouseDownExt += GlobalHookMouseDownExt;
                 return;
             }
 
         }
+
         /// <summary>
         /// 卸载钩子
         /// </summary>
@@ -613,6 +620,7 @@ namespace MouseRec_CSharp
             if (UninstallMouseHook && UninstallKeyboardHook)
             {
                 m_GlobalHook.MouseClick -= GlobalHookMouseClick;
+                m_GlobalHook.MouseDoubleClick -= GlobalHookMouseClick;
                 m_GlobalHook.MouseMoveExt -= GlobalHookMouseMoveExt;
                 m_GlobalHook.MouseDownExt -= GlobalHookMouseDownExt;
                 m_GlobalHook.KeyDown -= GlobalHookKeyDownExt;
@@ -632,6 +640,7 @@ namespace MouseRec_CSharp
             if (!UninstallKeyboardHook && UninstallMouseHook)
             {
                 m_GlobalHook.MouseClick -= GlobalHookMouseClick;
+                m_GlobalHook.MouseDoubleClick -= GlobalHookMouseClick;
                 m_GlobalHook.MouseMoveExt -= GlobalHookMouseMoveExt;
                 m_GlobalHook.MouseDownExt -= GlobalHookMouseDownExt;
                 return;
@@ -662,6 +671,24 @@ namespace MouseRec_CSharp
         private void GlobalHookMouseClick(object sender, MouseEventArgs e)
         {
 
+            if (e.Clicks == 2)
+            {
+                Insert_data(e.Button, true);
+
+            }
+            else
+            {
+                Insert_data(e.Button);
+            }
+
+        }
+        /// <summary>
+        /// 插入数据
+        /// </summary>
+        /// <param name="btn">按钮</param>
+        private void Insert_data(object btn = null, bool isdouble = false)
+        {
+
             // 判断屏幕坐标在程序窗体中不记录
             if (((MousePosition.X > Location.X) & (MousePosition.X < (Location.X + Width)) & (MousePosition.Y > Location.Y) & (MousePosition.Y < (Location.Y + Height)))) return;
 
@@ -680,7 +707,8 @@ namespace MouseRec_CSharp
                         int i = this.dgvRec.Rows.Add();
                         this.dgvRec.Rows[i].Cells[0].Value = i + 1;
                         this.dgvRec.Rows[i].Cells[1].Value = string.Format("{0},{1}", Control.MousePosition.X, Control.MousePosition.Y);
-                        this.dgvRec.Rows[i].Cells[2].Value = e.Button;
+                        this.dgvRec.Rows[i].Cells[2].Value = btn;
+                        this.dgvRec.Rows[i].Cells[3].Value = isdouble;
                         if (nudSecond.Value == -1) // -1 则计算机器时间
                         {
                             // n2 为0设置默认值0
@@ -694,20 +722,19 @@ namespace MouseRec_CSharp
                                 numericEnd_Timestamp = Math.Round((Convert.ToDouble(numericsSart_Timestamp) - Convert.ToDouble(numericEnd_Timestamp)) / 100);
                             }
                             // 写入时间
-                            this.dgvRec.Rows[i].Cells[3].Value = numericEnd_Timestamp;
+                            this.dgvRec.Rows[i].Cells[4].Value = numericEnd_Timestamp;
                             // n2 重新赋值
                             numericEnd_Timestamp = numericsSart_Timestamp;
                         }
                         else
                         {
-                            this.dgvRec.Rows[i].Cells[3].Value = this.nudSecond.Value;
+                            this.dgvRec.Rows[i].Cells[4].Value = this.nudSecond.Value;
                         }
                         // 依据id列倒序排序
                         this.dgvRec.Sort(this.dgvRec.Columns["id"], ListSortDirection.Descending);
                         break;
                     }
             }
-
         }
         /// <summary>
         /// XML 文件验证是否符合设计
@@ -728,6 +755,7 @@ namespace MouseRec_CSharp
 							                    <xs:element name='id' type='xs:string' minOccurs='0'/>
 							                    <xs:element name='position' type='xs:string' minOccurs='0'/>
 							                    <xs:element name='mousebutton' type='xs:string' minOccurs='0'/>
+                                                <xs:element name='doubleclick' type='xs:string' minOccurs='0'/>
 							                    <xs:element name='interval' type='xs:string' minOccurs='0'/>
 						                    </xs:sequence>
 					                    </xs:complexType>
@@ -818,8 +846,11 @@ namespace MouseRec_CSharp
                         XmlElement xmlElement_mousebutton = document.CreateElement("mousebutton");
                         xmlElement_mousebutton.InnerText = this.dgvRec.Rows[i].Cells[2].Value.ToString();
                         xmlElement_event.AppendChild(xmlElement_mousebutton);
+                        XmlElement xmlElement_doubleclick = document.CreateElement("doubleclick");
+                        xmlElement_doubleclick.InnerText = this.dgvRec.Rows[i].Cells[3].Value.ToString();
+                        xmlElement_event.AppendChild(xmlElement_doubleclick);
                         XmlElement xmlElement_interval = document.CreateElement("interval");
-                        xmlElement_interval.InnerText = this.dgvRec.Rows[i].Cells[3].Value.ToString();
+                        xmlElement_interval.InnerText = this.dgvRec.Rows[i].Cells[4].Value.ToString();
                         xmlElement_event.AppendChild(xmlElement_interval);
                         xmlElement_MouseRec.AppendChild(xmlElement_event);
                     }
