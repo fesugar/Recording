@@ -29,9 +29,9 @@ namespace MouseRec_CSharp
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
             this.MetrotipAll = new MetroFramework.Components.MetroToolTip();
             this.MetrolblState = new MetroFramework.Controls.MetroLabel();
@@ -42,6 +42,11 @@ namespace MouseRec_CSharp
             this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.MetropnlState = new MetroFramework.Controls.MetroPanel();
             this.dgvRec = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mousebutton = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doubleclick = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.interval = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblHotkey = new MetroFramework.Controls.MetroLabel();
             this.llbExplain = new System.Windows.Forms.LinkLabel();
             this.bgwRun = new System.ComponentModel.BackgroundWorker();
@@ -66,11 +71,6 @@ namespace MouseRec_CSharp
             this.pic_Alipay = new System.Windows.Forms.PictureBox();
             this.lbl_author = new System.Windows.Forms.Label();
             this.lbl_buildtime = new System.Windows.Forms.Label();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mousebutton = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doubleclick = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.interval = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MetrocmsRec.SuspendLayout();
             this.MetropnlState.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRec)).BeginInit();
@@ -160,14 +160,14 @@ namespace MouseRec_CSharp
             this.dgvRec.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.dgvRec.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvRec.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRec.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvRec.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRec.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -176,28 +176,28 @@ namespace MouseRec_CSharp
             this.doubleclick,
             this.interval});
             this.dgvRec.ContextMenuStrip = this.MetrocmsRec;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRec.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRec.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvRec.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.dgvRec.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.dgvRec.Location = new System.Drawing.Point(12, 312);
             this.dgvRec.MultiSelect = false;
             this.dgvRec.Name = "dgvRec";
             this.dgvRec.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRec.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRec.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvRec.RowHeadersWidth = 51;
             this.dgvRec.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvRec.RowTemplate.Height = 27;
@@ -206,6 +206,46 @@ namespace MouseRec_CSharp
             this.dgvRec.Size = new System.Drawing.Size(401, 147);
             this.dgvRec.TabIndex = 18;
             this.dgvRec.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.DgvRec_UserDeletedRow);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "序号";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Width = 62;
+            // 
+            // position
+            // 
+            this.position.HeaderText = "坐标";
+            this.position.MinimumWidth = 6;
+            this.position.Name = "position";
+            this.position.ReadOnly = true;
+            this.position.Width = 62;
+            // 
+            // mousebutton
+            // 
+            this.mousebutton.HeaderText = "按键";
+            this.mousebutton.MinimumWidth = 6;
+            this.mousebutton.Name = "mousebutton";
+            this.mousebutton.ReadOnly = true;
+            this.mousebutton.Width = 62;
+            // 
+            // doubleclick
+            // 
+            this.doubleclick.HeaderText = "双击";
+            this.doubleclick.MinimumWidth = 6;
+            this.doubleclick.Name = "doubleclick";
+            this.doubleclick.ReadOnly = true;
+            this.doubleclick.Width = 62;
+            // 
+            // interval
+            // 
+            this.interval.HeaderText = "间隔 ( /10s )";
+            this.interval.MinimumWidth = 6;
+            this.interval.Name = "interval";
+            this.interval.ReadOnly = true;
+            this.interval.Width = 101;
             // 
             // lblHotkey
             // 
@@ -475,46 +515,6 @@ namespace MouseRec_CSharp
             this.lbl_buildtime.TabIndex = 0;
             this.lbl_buildtime.Text = "Build time:";
             // 
-            // id
-            // 
-            this.id.HeaderText = "序号";
-            this.id.MinimumWidth = 6;
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Width = 62;
-            // 
-            // position
-            // 
-            this.position.HeaderText = "坐标";
-            this.position.MinimumWidth = 6;
-            this.position.Name = "position";
-            this.position.ReadOnly = true;
-            this.position.Width = 62;
-            // 
-            // mousebutton
-            // 
-            this.mousebutton.HeaderText = "按键";
-            this.mousebutton.MinimumWidth = 6;
-            this.mousebutton.Name = "mousebutton";
-            this.mousebutton.ReadOnly = true;
-            this.mousebutton.Width = 62;
-            // 
-            // doubleclick
-            // 
-            this.doubleclick.HeaderText = "双击";
-            this.doubleclick.MinimumWidth = 6;
-            this.doubleclick.Name = "doubleclick";
-            this.doubleclick.ReadOnly = true;
-            this.doubleclick.Width = 62;
-            // 
-            // interval
-            // 
-            this.interval.HeaderText = "间隔 ( /10s )";
-            this.interval.MinimumWidth = 6;
-            this.interval.Name = "interval";
-            this.interval.ReadOnly = true;
-            this.interval.Width = 101;
-            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -540,7 +540,7 @@ namespace MouseRec_CSharp
             this.Text = "鼠标动作录制工具";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Main_FormClosing);
-            this.Load += new System.EventHandler(this.Form_Main_Load);
+            this.Shown += new System.EventHandler(this.Form_Main_Shown);
             this.MetrocmsRec.ResumeLayout(false);
             this.MetropnlState.ResumeLayout(false);
             this.MetropnlState.PerformLayout();
