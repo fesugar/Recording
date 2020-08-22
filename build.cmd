@@ -2,7 +2,7 @@
 @echo off
 
 color 17
-Title 生成CAB自解压独立程序
+Title Building cab self-extracting package 
 
 REM msbuild config
 
@@ -25,13 +25,13 @@ if %PROCESSOR_ARCHITECTURE%==x86 (
 
 :begin
 cls
-Echo. 请选择需要的操作
-Echo     1 . MouseRec_CSharp　
-Echo     2 . MouseRec_VB 
+Echo. Please select the number you want ?
+Echo     1 . Compile MouseRec_CSharp　
+Echo     2 . Compile MouseRec_VB 
 Echo     3 . clean
 Echo     4 . Exit 
 
-Set /P Choice= 　　　　　请选择要进行的操作数字 ，然后按回车：
+Set /P Choice= 　　　　　Select the number and press enter:
 If not "%Choice%"=="" (
   If "%Choice%"=="4" exit
   If "%Choice%"=="3" call clean.bat && exit /b 1
@@ -56,14 +56,14 @@ del bin\build\ /s /q
 rd bin\build\ /s /q
 xcopy NDP462.exe bin\build\ /i /f /v /h /y
 xcopy NDP462.cmd bin\build\ /i /f /v /h /y
-:: 基本上都安装了.NET 4 多余的，还容易误报 xcopy Release\run.exe bin\ /i /f /v /h /y
 xcopy bin\Release\Io_Api.dll bin\build\ /i /f /v /h /y
 xcopy bin\Release\Io_Api.pdb bin\build\ /i /f /v /h /y
 xcopy bin\Release\MouseRec.exe bin\build\ /i /f /v /h /y
 xcopy bin\Release\MouseRec.exe.config bin\build\ /i /f /v /h /y
 xcopy bin\Release\MouseRec.pdb bin\build\ /i /f /v /h /y
 xcopy bin\Release\MouseRec.xml bin\build\ /i /f /v /h /y
-xcopy licenses.txt bin\build\ /i /f /v /h /y
+xcopy Notes.txt bin\build\ /i /f /v /h /y
+xcopy LICENSE bin\build\ /i /f /v /h /y
 xcopy readme.rtf bin\build\ /i /f /v /h /y
 ::xcopy MouseRec\Class_SystemHook.vb bin\ /i /f /v /h /y
 xcopy packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll bin\build\ /i /f /v /h /y
@@ -71,7 +71,7 @@ xcopy packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll bin\build\ /i /f
 xcopy packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll bin\build\ /i /f /v /h /y
 ::xcopy Io_Api\Class_io_apis.cs bin\ /i /f /v /h /y
 
-::合并DLL  EXE
+::INTO DLL  EXE
 "%pt%tools\ILMerge\ILMerge.exe"  /ndebug /target:winexe /targetplatform:v4 /out:"%pt%bin\build\newMouseRec.exe" /log "%pt%bin\build\MouseRec.exe" "%pt%bin\build\MetroFramework.Design.dll" "%pt%bin\build\MetroFramework.dll" "%pt%bin\build\MetroFramework.Fonts.dll" "%pt%bin\build\Io_Api.dll"
 
 del bin\build\MouseRec.exe
@@ -101,7 +101,8 @@ rd bin\build\ /s /q
 xcopy bin\Release\Io_Api.dll bin\build\ /i /f /v /h /y
 xcopy bin\Release\MouseRec.exe bin\build\ /i /f /v /h /y
 xcopy bin\Release\MouseRec.exe.config bin\build\ /i /f /v /h /y
-xcopy licenses.txt bin\build\ /i /f /v /h /y
+xcopy Notes.txt bin\build\ /i /f /v /h /y
+xcopy LICENSE bin\build\ /i /f /v /h /y
 xcopy readme.rtf bin\build\ /i /f /v /h /y
 ::xcopy MouseRec\Class_SystemHook.vb bin\ /i /f /v /h /y
 xcopy packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll bin\build\ /i /f /v /h /y
@@ -110,7 +111,7 @@ xcopy packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll bin\build\
 xcopy packages\MouseKeyHook.5.6.0\lib\net40\Gma.System.MouseKeyHook.dll bin\build\ /i /f /v /h /y
 ::xcopy Io_Api\Class_io_apis.cs bin\ /i /f /v /h /y
 
-::合并DLL  EXE
+::INTO DLL  EXE
 "%pt%tools\ILMerge\ILMerge.exe"  /ndebug /target:winexe /targetplatform:v4 /out:"%pt%bin\build\newMouseRec.exe" /log "%pt%bin\build\MouseRec.exe" "%pt%bin\build\MetroFramework.Design.dll" "%pt%bin\build\MetroFramework.dll" "%pt%bin\build\MetroFramework.Fonts.dll" "%pt%bin\build\Io_Api.dll" "%pt%bin\build\Gma.System.MouseKeyHook.dll"
 
 del bin\build\MouseRec.exe
@@ -133,6 +134,6 @@ REM rename
 if exist %pt%bin\build\newMouseRec.exe (rename %pt%bin\build\newMouseRec.exe MouseRec.exe) else (echo ERROR) 
 
 
-iexpress /n %pt%MouseRec.SED
+iexpress /n %pt%bin\MouseRec.SED
 
 explorer %pt%bin\build\Setup

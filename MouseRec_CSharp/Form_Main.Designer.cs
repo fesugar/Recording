@@ -437,6 +437,7 @@ namespace MouseRec_CSharp
             this.pl_about.Name = "pl_about";
             this.pl_about.Size = new System.Drawing.Size(307, 348);
             this.pl_about.TabIndex = 20;
+            this.pl_about.Visible = false;
             // 
             // lbl_prpe
             // 
@@ -444,7 +445,7 @@ namespace MouseRec_CSharp
             this.lbl_prpe.Name = "lbl_prpe";
             this.lbl_prpe.Size = new System.Drawing.Size(290, 53);
             this.lbl_prpe.TabIndex = 7;
-            this.lbl_prpe.Text = "Project Page:";
+            this.lbl_prpe.Text = "Project    : ";
             // 
             // grp_donate
             // 
@@ -502,23 +503,23 @@ namespace MouseRec_CSharp
             this.lbl_author.AutoSize = true;
             this.lbl_author.Location = new System.Drawing.Point(10, 41);
             this.lbl_author.Name = "lbl_author";
-            this.lbl_author.Size = new System.Drawing.Size(63, 15);
+            this.lbl_author.Size = new System.Drawing.Size(111, 15);
             this.lbl_author.TabIndex = 1;
-            this.lbl_author.Text = "Author:";
+            this.lbl_author.Text = "Author     : ";
             // 
             // lbl_buildtime
             // 
             this.lbl_buildtime.AutoSize = true;
             this.lbl_buildtime.Location = new System.Drawing.Point(10, 14);
             this.lbl_buildtime.Name = "lbl_buildtime";
-            this.lbl_buildtime.Size = new System.Drawing.Size(95, 15);
+            this.lbl_buildtime.Size = new System.Drawing.Size(111, 15);
             this.lbl_buildtime.TabIndex = 0;
-            this.lbl_buildtime.Text = "Build time:";
+            this.lbl_buildtime.Text = "Build time : ";
             // 
             // Form_Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(426, 497);
             this.Controls.Add(this.pl_about);
             this.Controls.Add(this.metroLink_about);

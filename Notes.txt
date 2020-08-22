@@ -11,6 +11,8 @@
 
  此工具完全免费
 
+ http://www.apache.org/licenses/LICENSE-2.0
+
  for .NET 4.6.1 
 
 

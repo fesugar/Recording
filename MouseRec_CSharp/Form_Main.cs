@@ -757,7 +757,7 @@ namespace MouseRec_CSharp
 #if DEBUG
             Console.WriteLine("doc1 {0}", errors ? "did not validate" : "validated");
 #endif
-            return (errors ? false : true);
+            return errors ? false : true;
         }
         /// <summary>
         /// 循环勾选框事件
@@ -891,12 +891,12 @@ namespace MouseRec_CSharp
         private void Form_Main_Shown(object sender, EventArgs e)
         {
             this.Initia_();
-            this.MetrotipAll.SetToolTip(this.btnRecording, "~~录制鼠标点击时坐标和动作~~");
-            this.MetrotipAll.SetToolTip(this.btnPlayback, "~~回放录制的鼠标点击动作~~");
-            this.MetrotipAll.SetToolTip(this.btnReset, "~~重置当前所有记录~~");
-            this.MetrotipAll.SetToolTip(this.lblHotkey, "~~停止快捷热键~~");
-            this.MetrotipAll.SetToolTip(this.chkLoop, "~~选中状态下会循环回放录制的动作~~");
-            this.MetrotipAll.SetToolTip(this.nudSecond, "~~设置每次鼠标点击动作间隔时间~~\n~~值为-1 时则自动计算间隔的时间~~");
+            this.MetrotipAll.SetToolTip(this.btnRecording, "录制鼠标点击时坐标和动作");
+            this.MetrotipAll.SetToolTip(this.btnPlayback, "回放录制的鼠标点击动作");
+            this.MetrotipAll.SetToolTip(this.btnReset, "重置当前所有记录");
+            this.MetrotipAll.SetToolTip(this.lblHotkey, "停止快捷热键");
+            this.MetrotipAll.SetToolTip(this.chkLoop, "选中状态下会循环回放录制的动作");
+            this.MetrotipAll.SetToolTip(this.nudSecond, "设置每次鼠标点击动作间隔时间\n值为-1 时则自动计算间隔的时间");
             this.lblCountdown.Text = null;
             this.dgvRec.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
             this.dgvRec.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -904,9 +904,8 @@ namespace MouseRec_CSharp
             this.dgvRec.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
 
             //about initia
-            pl_about.Visible = false;
             lbl_buildtime.Text += System.IO.File.GetLastWriteTime(this.GetType().Assembly.Location);
-            lbl_author.Text += "严圣川";
+            lbl_author.Text += @"fesugar@fesugar.com";
             lbl_prpe.Text += @"https://github.com/fesugar/Recording";
         }
     }
