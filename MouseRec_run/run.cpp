@@ -96,7 +96,7 @@ bool RegistryGetValue(HKEY, const TCHAR*, const TCHAR*, DWORD, LPBYTE, DWORD);
 ///******************************************************************
 //Function Name: 判断.NET Framework 1.1是否安装
 //Description:    Uses the detection method recommended at
-//[url]http://msdn.microsoft.com/library/ms994339.aspx[/url]
+//[url]http://msdn.microsoft.com/library/ms994339.aspx [/url]
 //to determine whether the .NET Framework 1.1 is
 //installed on the machine
 //Inputs:        NONE
@@ -119,7 +119,7 @@ bool RegistryGetValue(HKEY, const TCHAR*, const TCHAR*, DWORD, LPBYTE, DWORD);
 ///******************************************************************
 //Function Name: 判断.NET Framework 2.0是否安装
 //Description:    Uses the detection method recommended at
-//[url]http://msdn.microsoft.com/library/aa480243.aspx[/url]
+//[url]http://msdn.microsoft.com/library/aa480243.aspx [/url]
 //to determine whether the .NET Framework 2.0 is
 //installed on the machine
 //Inputs:        NONE
@@ -142,7 +142,7 @@ bool RegistryGetValue(HKEY, const TCHAR*, const TCHAR*, DWORD, LPBYTE, DWORD);
 ///******************************************************************
 //Function Name: 判断.NET Framework 3.0是否安装
 //Description:    Uses the detection method recommended at
-//[url]http://msdn.microsoft.com/library/aa964979.aspx[/url]
+//[url]http://msdn.microsoft.com/library/aa964979.aspx [/url]
 //to determine whether the .NET Framework 3.0 is
 //installed on the machine
 //Inputs:        NONE
@@ -167,7 +167,7 @@ bool RegistryGetValue(HKEY, const TCHAR*, const TCHAR*, DWORD, LPBYTE, DWORD);
 ///******************************************************************
 //Function Name: 判断.NET Framework 3.5是否安装
 //Description:    Uses the detection method recommended at
-//[url]http://msdn.microsoft.com/library/cc160716.aspx[/url]
+//[url]http://msdn.microsoft.com/library/cc160716.aspx [/url]
 //to determine whether the .NET Framework 3.5 is
 //installed on the machine
 //Inputs:        NONE
@@ -192,7 +192,7 @@ bool RegistryGetValue(HKEY, const TCHAR*, const TCHAR*, DWORD, LPBYTE, DWORD);
 /******************************************************************
 Function Name: 判断.NET Framework 4.0是否安装
 Description:    Uses the detection method recommended at
-[url]http://msdn.microsoft.com/library/cc160716.aspx[/url]
+[url]http://msdn.microsoft.com/library/cc160716.aspx [/url]
 to determine whether the .NET Framework 4.0 is
 installed on the machine
 Inputs:        NONE
@@ -216,7 +216,7 @@ bool IsNetfx40Installed()
 ///******************************************************************
 //Function Name: 获取.NET Framework 1.0 SP 的版本
 //Description:    Uses the detection method recommended at
-//[url]http://blogs.msdn.com/astebner/archive/2004/09/14/229802.aspx[/url]
+//[url]http://blogs.msdn.com/astebner/archive/2004/09/14/229802.aspx [/url]
 //to determine what service pack for the
 //.NET Framework 1.0 is installed on the machine
 //Inputs:        NONE
@@ -545,7 +545,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		//下面开始使用 ShellExecute 运行指定程序
 		if (WinExec("MouseRec.exe", SW_SHOWNORMAL) < 32) {
 
-			_stprintf_s(szMessage, MAX_PATH, _T("运行中发生错误，错误代码 %d"), 2);
+			_stprintf_s(szMessage, MAX_PATH, _T("运行中发生错误，错误代码 %d \n未能找到 MouseRec.exe "), 2);
 			MessageBox(NULL, szMessage, NULL, MB_OK);
 		}
 

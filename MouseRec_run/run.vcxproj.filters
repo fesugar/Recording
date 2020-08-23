@@ -48,6 +48,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\NDP462.cmd" />
-    <None Include="..\NDP462-KB3151800-x86-x64-AllOS-CHS.exe" />
   </ItemGroup>
 </Project>

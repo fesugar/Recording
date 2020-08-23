@@ -61,6 +61,7 @@ namespace MouseRec_CSharp
             this.lblCursorPosition = new MetroFramework.Controls.MetroLabel();
             this.grpExplain = new System.Windows.Forms.GroupBox();
             this.grpPreview = new System.Windows.Forms.GroupBox();
+            this.chkTopmost = new MetroFramework.Controls.MetroCheckBox();
             this.metroLink_about = new MetroFramework.Controls.MetroLink();
             this.pl_about = new System.Windows.Forms.Panel();
             this.lbl_prpe = new System.Windows.Forms.Label();
@@ -95,7 +96,7 @@ namespace MouseRec_CSharp
             this.MetrolblState.Location = new System.Drawing.Point(3, 6);
             this.MetrolblState.Name = "MetrolblState";
             this.MetrolblState.Size = new System.Drawing.Size(84, 20);
-            this.MetrolblState.TabIndex = 10;
+            this.MetrolblState.TabIndex = 2;
             this.MetrolblState.Text = "MetroLabel1";
             // 
             // ToolStripMenuItemExport
@@ -147,7 +148,7 @@ namespace MouseRec_CSharp
             this.MetropnlState.Location = new System.Drawing.Point(1, 463);
             this.MetropnlState.Name = "MetropnlState";
             this.MetropnlState.Size = new System.Drawing.Size(426, 32);
-            this.MetropnlState.TabIndex = 19;
+            this.MetropnlState.TabIndex = 3;
             this.MetropnlState.VerticalScrollbarBarColor = true;
             this.MetropnlState.VerticalScrollbarHighlightOnWheel = false;
             this.MetropnlState.VerticalScrollbarSize = 10;
@@ -204,7 +205,7 @@ namespace MouseRec_CSharp
             this.dgvRec.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvRec.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRec.Size = new System.Drawing.Size(401, 147);
-            this.dgvRec.TabIndex = 18;
+            this.dgvRec.TabIndex = 4;
             this.dgvRec.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.DgvRec_UserDeletedRow);
             // 
             // id
@@ -254,7 +255,7 @@ namespace MouseRec_CSharp
             this.lblHotkey.Location = new System.Drawing.Point(232, 126);
             this.lblHotkey.Name = "lblHotkey";
             this.lblHotkey.Size = new System.Drawing.Size(24, 20);
-            this.lblHotkey.TabIndex = 17;
+            this.lblHotkey.TabIndex = 5;
             this.lblHotkey.Text = "F8";
             this.lblHotkey.Visible = false;
             // 
@@ -264,7 +265,7 @@ namespace MouseRec_CSharp
             this.llbExplain.Location = new System.Drawing.Point(6, 21);
             this.llbExplain.Name = "llbExplain";
             this.llbExplain.Size = new System.Drawing.Size(134, 53);
-            this.llbExplain.TabIndex = 9;
+            this.llbExplain.TabIndex = 0;
             this.llbExplain.TabStop = true;
             this.llbExplain.Text = "录制鼠标动作进行回放   - by  fesugar.com";
             this.llbExplain.UseCompatibleTextRendering = true;
@@ -282,7 +283,7 @@ namespace MouseRec_CSharp
             this.btnPlayback.Location = new System.Drawing.Point(12, 126);
             this.btnPlayback.Name = "btnPlayback";
             this.btnPlayback.Size = new System.Drawing.Size(214, 31);
-            this.btnPlayback.TabIndex = 15;
+            this.btnPlayback.TabIndex = 6;
             this.btnPlayback.Text = "动作回放";
             this.btnPlayback.UseSelectable = true;
             this.btnPlayback.Click += new System.EventHandler(this.BtnPlayback_Click);
@@ -293,7 +294,7 @@ namespace MouseRec_CSharp
             this.lblLog.Location = new System.Drawing.Point(12, 287);
             this.lblLog.Name = "lblLog";
             this.lblLog.Size = new System.Drawing.Size(69, 20);
-            this.lblLog.TabIndex = 14;
+            this.lblLog.TabIndex = 7;
             this.lblLog.Text = "操作日志";
             // 
             // btnRecording
@@ -302,7 +303,7 @@ namespace MouseRec_CSharp
             this.btnRecording.Location = new System.Drawing.Point(12, 83);
             this.btnRecording.Name = "btnRecording";
             this.btnRecording.Size = new System.Drawing.Size(214, 30);
-            this.btnRecording.TabIndex = 13;
+            this.btnRecording.TabIndex = 8;
             this.btnRecording.Text = "录制动作";
             this.btnRecording.UseSelectable = true;
             this.btnRecording.Click += new System.EventHandler(this.BtnRecording_Click);
@@ -316,7 +317,7 @@ namespace MouseRec_CSharp
             this.lblCountdown.Location = new System.Drawing.Point(125, 0);
             this.lblCountdown.Name = "lblCountdown";
             this.lblCountdown.Size = new System.Drawing.Size(109, 117);
-            this.lblCountdown.TabIndex = 12;
+            this.lblCountdown.TabIndex = 0;
             this.lblCountdown.Text = "3";
             this.lblCountdown.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -326,7 +327,7 @@ namespace MouseRec_CSharp
             this.btnReset.Location = new System.Drawing.Point(310, 20);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(70, 29);
-            this.btnReset.TabIndex = 8;
+            this.btnReset.TabIndex = 1;
             this.btnReset.Text = "重置";
             this.btnReset.UseSelectable = true;
             this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
@@ -334,11 +335,11 @@ namespace MouseRec_CSharp
             // chkLoop
             // 
             this.chkLoop.AutoSize = true;
-            this.chkLoop.Location = new System.Drawing.Point(220, 82);
+            this.chkLoop.Location = new System.Drawing.Point(220, 61);
             this.chkLoop.Name = "chkLoop";
             this.chkLoop.Size = new System.Drawing.Size(136, 17);
             this.chkLoop.Style = MetroFramework.MetroColorStyle.Orange;
-            this.chkLoop.TabIndex = 7;
+            this.chkLoop.TabIndex = 2;
             this.chkLoop.Text = "已停用循环回放";
             this.chkLoop.UseSelectable = true;
             this.chkLoop.CheckStateChanged += new System.EventHandler(this.ChkLoop_CheckStateChanged);
@@ -375,7 +376,7 @@ namespace MouseRec_CSharp
             this.lblInterval.Location = new System.Drawing.Point(11, 54);
             this.lblInterval.Name = "lblInterval";
             this.lblInterval.Size = new System.Drawing.Size(136, 20);
-            this.lblInterval.TabIndex = 1;
+            this.lblInterval.TabIndex = 4;
             this.lblInterval.Text = "间隔时间（t/10秒）";
             // 
             // lblCursorPosition
@@ -384,7 +385,7 @@ namespace MouseRec_CSharp
             this.lblCursorPosition.Location = new System.Drawing.Point(11, 25);
             this.lblCursorPosition.Name = "lblCursorPosition";
             this.lblCursorPosition.Size = new System.Drawing.Size(84, 20);
-            this.lblCursorPosition.TabIndex = 0;
+            this.lblCursorPosition.TabIndex = 5;
             this.lblCursorPosition.Text = "光标位置：";
             // 
             // grpExplain
@@ -393,7 +394,7 @@ namespace MouseRec_CSharp
             this.grpExplain.Location = new System.Drawing.Point(267, 83);
             this.grpExplain.Name = "grpExplain";
             this.grpExplain.Size = new System.Drawing.Size(146, 79);
-            this.grpExplain.TabIndex = 16;
+            this.grpExplain.TabIndex = 9;
             this.grpExplain.TabStop = false;
             this.grpExplain.Text = "说明";
             // 
@@ -405,12 +406,27 @@ namespace MouseRec_CSharp
             this.grpPreview.Controls.Add(this.nudSecond);
             this.grpPreview.Controls.Add(this.lblInterval);
             this.grpPreview.Controls.Add(this.lblCursorPosition);
+            this.grpPreview.Controls.Add(this.chkTopmost);
             this.grpPreview.Location = new System.Drawing.Point(12, 168);
             this.grpPreview.Name = "grpPreview";
             this.grpPreview.Size = new System.Drawing.Size(401, 115);
-            this.grpPreview.TabIndex = 12;
+            this.grpPreview.TabIndex = 10;
             this.grpPreview.TabStop = false;
             this.grpPreview.Text = "预览";
+            // 
+            // chkTopmost
+            // 
+            this.chkTopmost.AutoSize = true;
+            this.chkTopmost.Checked = true;
+            this.chkTopmost.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTopmost.Location = new System.Drawing.Point(220, 84);
+            this.chkTopmost.Name = "chkTopmost";
+            this.chkTopmost.Size = new System.Drawing.Size(136, 17);
+            this.chkTopmost.Style = MetroFramework.MetroColorStyle.Blue;
+            this.chkTopmost.TabIndex = 6;
+            this.chkTopmost.Text = "窗体总是在最前";
+            this.chkTopmost.UseSelectable = true;
+            this.chkTopmost.CheckStateChanged += new System.EventHandler(this.chkTopmost_CheckStateChanged);
             // 
             // metroLink_about
             // 
@@ -418,7 +434,7 @@ namespace MouseRec_CSharp
             this.metroLink_about.Location = new System.Drawing.Point(267, 33);
             this.metroLink_about.Name = "metroLink_about";
             this.metroLink_about.Size = new System.Drawing.Size(57, 25);
-            this.metroLink_about.TabIndex = 13;
+            this.metroLink_about.TabIndex = 2;
             this.metroLink_about.Text = "About";
             this.metroLink_about.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.metroLink_about.UseSelectable = true;
@@ -436,15 +452,15 @@ namespace MouseRec_CSharp
             this.pl_about.Location = new System.Drawing.Point(60, 74);
             this.pl_about.Name = "pl_about";
             this.pl_about.Size = new System.Drawing.Size(307, 348);
-            this.pl_about.TabIndex = 20;
+            this.pl_about.TabIndex = 1;
             this.pl_about.Visible = false;
             // 
             // lbl_prpe
             // 
-            this.lbl_prpe.Location = new System.Drawing.Point(10, 72);
+            this.lbl_prpe.Location = new System.Drawing.Point(10, 71);
             this.lbl_prpe.Name = "lbl_prpe";
             this.lbl_prpe.Size = new System.Drawing.Size(290, 53);
-            this.lbl_prpe.TabIndex = 7;
+            this.lbl_prpe.TabIndex = 0;
             this.lbl_prpe.Text = "Project    : ";
             // 
             // grp_donate
@@ -456,7 +472,7 @@ namespace MouseRec_CSharp
             this.grp_donate.Location = new System.Drawing.Point(7, 128);
             this.grp_donate.Name = "grp_donate";
             this.grp_donate.Size = new System.Drawing.Size(293, 209);
-            this.grp_donate.TabIndex = 6;
+            this.grp_donate.TabIndex = 1;
             this.grp_donate.TabStop = false;
             this.grp_donate.Text = "Donate";
             // 
@@ -466,7 +482,7 @@ namespace MouseRec_CSharp
             this.lbl_WeChat.Location = new System.Drawing.Point(194, 172);
             this.lbl_WeChat.Name = "lbl_WeChat";
             this.lbl_WeChat.Size = new System.Drawing.Size(55, 15);
-            this.lbl_WeChat.TabIndex = 5;
+            this.lbl_WeChat.TabIndex = 0;
             this.lbl_WeChat.Text = "WeChat";
             // 
             // lbl_Alipay
@@ -475,7 +491,7 @@ namespace MouseRec_CSharp
             this.lbl_Alipay.Location = new System.Drawing.Point(41, 172);
             this.lbl_Alipay.Name = "lbl_Alipay";
             this.lbl_Alipay.Size = new System.Drawing.Size(55, 15);
-            this.lbl_Alipay.TabIndex = 4;
+            this.lbl_Alipay.TabIndex = 1;
             this.lbl_Alipay.Text = "Alipay";
             // 
             // pic_WeChat
@@ -485,7 +501,7 @@ namespace MouseRec_CSharp
             this.pic_WeChat.Name = "pic_WeChat";
             this.pic_WeChat.Size = new System.Drawing.Size(133, 133);
             this.pic_WeChat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pic_WeChat.TabIndex = 3;
+            this.pic_WeChat.TabIndex = 2;
             this.pic_WeChat.TabStop = false;
             // 
             // pic_Alipay
@@ -495,7 +511,7 @@ namespace MouseRec_CSharp
             this.pic_Alipay.Name = "pic_Alipay";
             this.pic_Alipay.Size = new System.Drawing.Size(133, 133);
             this.pic_Alipay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pic_Alipay.TabIndex = 2;
+            this.pic_Alipay.TabIndex = 3;
             this.pic_Alipay.TabStop = false;
             // 
             // lbl_author
@@ -504,7 +520,7 @@ namespace MouseRec_CSharp
             this.lbl_author.Location = new System.Drawing.Point(10, 41);
             this.lbl_author.Name = "lbl_author";
             this.lbl_author.Size = new System.Drawing.Size(111, 15);
-            this.lbl_author.TabIndex = 1;
+            this.lbl_author.TabIndex = 2;
             this.lbl_author.Text = "Author     : ";
             // 
             // lbl_buildtime
@@ -513,7 +529,7 @@ namespace MouseRec_CSharp
             this.lbl_buildtime.Location = new System.Drawing.Point(10, 14);
             this.lbl_buildtime.Name = "lbl_buildtime";
             this.lbl_buildtime.Size = new System.Drawing.Size(111, 15);
-            this.lbl_buildtime.TabIndex = 0;
+            this.lbl_buildtime.TabIndex = 3;
             this.lbl_buildtime.Text = "Build time : ";
             // 
             // Form_Main
@@ -600,6 +616,7 @@ namespace MouseRec_CSharp
         private System.Windows.Forms.DataGridViewTextBoxColumn mousebutton;
         private System.Windows.Forms.DataGridViewTextBoxColumn doubleclick;
         private System.Windows.Forms.DataGridViewTextBoxColumn interval;
+        private MetroFramework.Controls.MetroCheckBox chkTopmost;
     }
 }
 

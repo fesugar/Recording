@@ -897,6 +897,7 @@ namespace MouseRec_CSharp
             this.MetrotipAll.SetToolTip(this.lblHotkey, "停止快捷热键");
             this.MetrotipAll.SetToolTip(this.chkLoop, "选中状态下会循环回放录制的动作");
             this.MetrotipAll.SetToolTip(this.nudSecond, "设置每次鼠标点击动作间隔时间\n值为-1 时则自动计算间隔的时间");
+            this.MetrotipAll.SetToolTip(this.chkTopmost, "设置窗体是否总在最前显示");
             this.lblCountdown.Text = null;
             this.dgvRec.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
             this.dgvRec.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -907,6 +908,22 @@ namespace MouseRec_CSharp
             lbl_buildtime.Text += System.IO.File.GetLastWriteTime(this.GetType().Assembly.Location);
             lbl_author.Text += @"fesugar@fesugar.com";
             lbl_prpe.Text += @"https://github.com/fesugar/Recording";
+        }
+        /// <summary>
+        /// 始终保持最前勾选框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void chkTopmost_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (chkTopmost.Checked == true)
+            {
+                this.TopMost = true;
+            }
+            else
+            {
+                this.TopMost = false;
+            }
         }
     }
 }
