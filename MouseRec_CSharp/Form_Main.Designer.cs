@@ -431,13 +431,15 @@ namespace MouseRec_CSharp
             // metroLink_about
             // 
             this.metroLink_about.AutoSize = true;
+            this.metroLink_about.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroLink_about.Location = new System.Drawing.Point(267, 33);
             this.metroLink_about.Name = "metroLink_about";
-            this.metroLink_about.Size = new System.Drawing.Size(57, 25);
+            this.metroLink_about.Size = new System.Drawing.Size(77, 25);
             this.metroLink_about.TabIndex = 2;
-            this.metroLink_about.Text = "About";
+            this.metroLink_about.Text = "关于";
             this.metroLink_about.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.metroLink_about.UseSelectable = true;
+            this.metroLink_about.Click += new System.EventHandler(this.metroLink_about_Click);
             this.metroLink_about.MouseEnter += new System.EventHandler(this.metroLink_about_MouseEnter);
             this.metroLink_about.MouseLeave += new System.EventHandler(this.metroLink_about_MouseLeave);
             // 
@@ -457,11 +459,12 @@ namespace MouseRec_CSharp
             // 
             // lbl_prpe
             // 
-            this.lbl_prpe.Location = new System.Drawing.Point(10, 71);
+            this.lbl_prpe.AutoEllipsis = true;
+            this.lbl_prpe.Location = new System.Drawing.Point(10, 83);
             this.lbl_prpe.Name = "lbl_prpe";
             this.lbl_prpe.Size = new System.Drawing.Size(290, 53);
             this.lbl_prpe.TabIndex = 0;
-            this.lbl_prpe.Text = "Project    : ";
+            this.lbl_prpe.Text = "项目链接 :";
             // 
             // grp_donate
             // 
@@ -469,35 +472,35 @@ namespace MouseRec_CSharp
             this.grp_donate.Controls.Add(this.lbl_Alipay);
             this.grp_donate.Controls.Add(this.pic_WeChat);
             this.grp_donate.Controls.Add(this.pic_Alipay);
-            this.grp_donate.Location = new System.Drawing.Point(7, 128);
+            this.grp_donate.Location = new System.Drawing.Point(7, 147);
             this.grp_donate.Name = "grp_donate";
-            this.grp_donate.Size = new System.Drawing.Size(293, 209);
+            this.grp_donate.Size = new System.Drawing.Size(293, 190);
             this.grp_donate.TabIndex = 1;
             this.grp_donate.TabStop = false;
-            this.grp_donate.Text = "Donate";
+            this.grp_donate.Text = "捐赠";
             // 
             // lbl_WeChat
             // 
             this.lbl_WeChat.AutoSize = true;
-            this.lbl_WeChat.Location = new System.Drawing.Point(194, 172);
+            this.lbl_WeChat.Location = new System.Drawing.Point(194, 167);
             this.lbl_WeChat.Name = "lbl_WeChat";
-            this.lbl_WeChat.Size = new System.Drawing.Size(55, 15);
+            this.lbl_WeChat.Size = new System.Drawing.Size(37, 15);
             this.lbl_WeChat.TabIndex = 0;
-            this.lbl_WeChat.Text = "WeChat";
+            this.lbl_WeChat.Text = "微信";
             // 
             // lbl_Alipay
             // 
             this.lbl_Alipay.AutoSize = true;
-            this.lbl_Alipay.Location = new System.Drawing.Point(41, 172);
+            this.lbl_Alipay.Location = new System.Drawing.Point(41, 167);
             this.lbl_Alipay.Name = "lbl_Alipay";
-            this.lbl_Alipay.Size = new System.Drawing.Size(55, 15);
+            this.lbl_Alipay.Size = new System.Drawing.Size(52, 15);
             this.lbl_Alipay.TabIndex = 1;
-            this.lbl_Alipay.Text = "Alipay";
+            this.lbl_Alipay.Text = "支付宝";
             // 
             // pic_WeChat
             // 
             this.pic_WeChat.Image = ((System.Drawing.Image)(resources.GetObject("pic_WeChat.Image")));
-            this.pic_WeChat.Location = new System.Drawing.Point(153, 29);
+            this.pic_WeChat.Location = new System.Drawing.Point(153, 25);
             this.pic_WeChat.Name = "pic_WeChat";
             this.pic_WeChat.Size = new System.Drawing.Size(133, 133);
             this.pic_WeChat.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -507,7 +510,7 @@ namespace MouseRec_CSharp
             // pic_Alipay
             // 
             this.pic_Alipay.Image = ((System.Drawing.Image)(resources.GetObject("pic_Alipay.Image")));
-            this.pic_Alipay.Location = new System.Drawing.Point(6, 29);
+            this.pic_Alipay.Location = new System.Drawing.Point(6, 25);
             this.pic_Alipay.Name = "pic_Alipay";
             this.pic_Alipay.Size = new System.Drawing.Size(133, 133);
             this.pic_Alipay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -517,20 +520,20 @@ namespace MouseRec_CSharp
             // lbl_author
             // 
             this.lbl_author.AutoSize = true;
-            this.lbl_author.Location = new System.Drawing.Point(10, 41);
+            this.lbl_author.Location = new System.Drawing.Point(10, 46);
             this.lbl_author.Name = "lbl_author";
-            this.lbl_author.Size = new System.Drawing.Size(111, 15);
+            this.lbl_author.Size = new System.Drawing.Size(83, 15);
             this.lbl_author.TabIndex = 2;
-            this.lbl_author.Text = "Author     : ";
+            this.lbl_author.Text = "联系作者 :";
             // 
             // lbl_buildtime
             // 
             this.lbl_buildtime.AutoSize = true;
-            this.lbl_buildtime.Location = new System.Drawing.Point(10, 14);
+            this.lbl_buildtime.Location = new System.Drawing.Point(10, 8);
             this.lbl_buildtime.Name = "lbl_buildtime";
-            this.lbl_buildtime.Size = new System.Drawing.Size(111, 15);
+            this.lbl_buildtime.Size = new System.Drawing.Size(83, 15);
             this.lbl_buildtime.TabIndex = 3;
-            this.lbl_buildtime.Text = "Build time : ";
+            this.lbl_buildtime.Text = "编译时间 :";
             // 
             // Form_Main
             // 

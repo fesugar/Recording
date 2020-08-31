@@ -9,7 +9,7 @@
 * 作    者 ：fesugar
 * 邮    箱 ：fesugar@fesugar.com
 * 创建时间 ：12:42 2020/3/16
-* 更新时间 ：12:42 2020/3/16
+* 更新时间 ：12:42 2020/8/31
 * 版 本 号 ：v1.0.0.0
 * 参考文献 ：
 *******************************************************************
@@ -400,6 +400,8 @@ namespace MouseRec_CSharp
                             }
                             else
                             {
+                                manualReset.WaitOne();    // 阻塞当前线程信号
+
                                 System.Threading.Thread.Sleep(100);
                                 int percentComplete = (int)((float)j / (float)Convert.ToInt32(dgvRec[4, i].Value) * 100);
                                 worker.ReportProgress(percentComplete);
@@ -872,6 +874,7 @@ namespace MouseRec_CSharp
         /// <param name="e"></param>
         private void metroLink_about_MouseEnter(object sender, EventArgs e)
         {
+            metroLink_about.Text = "更新";
             pl_about.Visible = true;
         }
         /// <summary>
@@ -881,8 +884,38 @@ namespace MouseRec_CSharp
         /// <param name="e"></param>
         private void metroLink_about_MouseLeave(object sender, EventArgs e)
         {
+            metroLink_about.Text = "关于";
             pl_about.Visible = false;
         }
+        /// <summary>
+        /// about 标签单击控件事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void metroLink_about_Click(object sender, EventArgs e)
+        {
+            if (System.IO.File.Exists(Application.StartupPath + @"\Up.exe"))
+            {
+                /*  GitHub - fesugar/Tupdate: 通用远程更新工具
+                    https://github.com/fesugar/Tupdate 
+                */
+                Process proc = Process.Start(Application.StartupPath + @"\Up.exe", string.Format(@"{0} {1}在线升级 {2} https://raw.githubusercontent.com/fesugar/Recording/tUP.xml", Application.ProductVersion, this.Text, System.Reflection.Assembly.GetExecutingAssembly().GetName().Name));
+                this.WindowState = FormWindowState.Minimized;    // 最小化当前窗口到任务栏
+                manualReset.Reset();    // 暂停线程
+                if (proc != null)
+                {
+                    proc.WaitForExit();    //  等待进程退出
+                    this.WindowState = FormWindowState.Normal;    // 恢复默认窗口
+                    manualReset.Set();    // 恢复线程
+                }
+            }
+        }
+
+        /// <summary>
+        /// 设置线程阻塞
+        /// </summary>
+        private System.Threading.ManualResetEvent manualReset = new System.Threading.ManualResetEvent(true);
+
         /// <summary>
         /// 窗体 show 完成事件
         /// </summary>
@@ -905,9 +938,9 @@ namespace MouseRec_CSharp
             this.dgvRec.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
 
             //about initia
-            lbl_buildtime.Text += System.IO.File.GetLastWriteTime(this.GetType().Assembly.Location);
+            lbl_buildtime.Text += string.Format("{0}\n\r(Version {1} )", System.IO.File.GetLastWriteTime(this.GetType().Assembly.Location), Application.ProductVersion);
             lbl_author.Text += @"fesugar@fesugar.com";
-            lbl_prpe.Text += @"https://github.com/fesugar/Recording";
+            lbl_prpe.Text += "\nhttps://github.com/fesugar/Recording";
         }
         /// <summary>
         /// 始终保持最前勾选框
@@ -925,5 +958,6 @@ namespace MouseRec_CSharp
                 this.TopMost = false;
             }
         }
+
     }
 }

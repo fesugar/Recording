@@ -32,5 +32,7 @@
 
 # 打赏
 ![支付宝](https://cdn.fesugar.com/static/img/zfbqrcode.png)
+支付宝扫码
 
 ![微信](https://cdn.fesugar.com/static/img/wxqrcode.png)
+微信扫码
