@@ -14,7 +14,7 @@ echo SEDVersion=^3 >>%pt%bin\MouseRec.SED
 echo [Options] >>%pt%bin\MouseRec.SED
 echo PackagePurpose=^InstallApp >>%pt%bin\MouseRec.SED
 echo ShowInstallProgramWindow=^0 >>%pt%bin\MouseRec.SED
-echo HideExtractAnimation=^1 >>%pt%bin\MouseRec.SED
+echo HideExtractAnimation=^0 >>%pt%bin\MouseRec.SED
 echo UseLongFileName=^0 >>%pt%bin\MouseRec.SED
 echo InsideCompressed=^0 >>%pt%bin\MouseRec.SED
 echo CAB_FixedSize=^0 >>%pt%bin\MouseRec.SED
@@ -48,6 +48,7 @@ echo FILE4=^"NDP462.exe^" >>%pt%bin\MouseRec.SED
 echo FILE5=^"readme.rtf^" >>%pt%bin\MouseRec.SED
 echo FILE6=^"LICENSE^" >>%pt%bin\MouseRec.SED
 echo FILE7=^"MouseRec_run.exe^" >>%pt%bin\MouseRec.SED
+if exist bin\build\Up.exe ( echo FILE8=^"Up.exe^" >>%pt%bin\MouseRec.SED )
 echo [SourceFiles] >>%pt%bin\MouseRec.SED
 echo SourceFiles0=%pt%bin\build\ >>%pt%bin\MouseRec.SED
 echo [SourceFiles0] >>%pt%bin\MouseRec.SED
@@ -59,7 +60,7 @@ echo %%FILE4%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE5%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE6%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE7%%=^ >>%pt%bin\MouseRec.SED
-
+if exist bin\build\Up.exe ( echo %%FILE8%%=^ >>%pt%bin\MouseRec.SED )
 goto end
 
 REM SED for cs
@@ -70,7 +71,7 @@ echo SEDVersion=^3 >>%pt%bin\MouseRec.SED
 echo [Options] >>%pt%bin\MouseRec.SED
 echo PackagePurpose=^InstallApp >>%pt%bin\MouseRec.SED
 echo ShowInstallProgramWindow=^0 >>%pt%bin\MouseRec.SED
-echo HideExtractAnimation=^1 >>%pt%bin\MouseRec.SED
+echo HideExtractAnimation=^0 >>%pt%bin\MouseRec.SED
 echo UseLongFileName=^0 >>%pt%bin\MouseRec.SED
 echo InsideCompressed=^0 >>%pt%bin\MouseRec.SED
 echo CAB_FixedSize=^0 >>%pt%bin\MouseRec.SED
@@ -104,6 +105,7 @@ echo FILE4=^"LICENSE^" >>%pt%bin\MouseRec.SED
 echo FILE5=^"MouseRec_run.exe^" >>%pt%bin\MouseRec.SED
 echo FILE6=^"NDP462.cmd^" >>%pt%bin\MouseRec.SED
 echo FILE7=^"NDP462.exe^" >>%pt%bin\MouseRec.SED
+if exist bin\build\Up.exe ( echo FILE8=^"Up.exe^" >>%pt%bin\MouseRec.SED )
 echo [SourceFiles] >>%pt%bin\MouseRec.SED
 echo SourceFiles0=%pt%bin\build\ >>%pt%bin\MouseRec.SED
 echo [SourceFiles0] >>%pt%bin\MouseRec.SED
@@ -115,6 +117,7 @@ echo %%FILE4%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE5%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE6%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE7%%=^ >>%pt%bin\MouseRec.SED
+if exist bin\build\Up.exe ( echo %%FILE8%%=^ >>%pt%bin\MouseRec.SED )
 goto end
 
 :end

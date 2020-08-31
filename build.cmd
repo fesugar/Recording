@@ -63,6 +63,7 @@ xcopy bin\Release\MouseRec.xml bin\build\ /i /f /v /h /y
 xcopy Notes.txt bin\build\ /i /f /v /h /y
 xcopy LICENSE bin\build\ /i /f /v /h /y
 xcopy readme.rtf bin\build\ /i /f /v /h /y
+if exist bin\Release\Up.exe ( xcopy bin\Release\Up.exe bin\build\ /i /f /v /h /y )
 ::xcopy MouseRec\Class_SystemHook.vb bin\ /i /f /v /h /y
 xcopy packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll bin\build\ /i /f /v /h /y
 xcopy packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll bin\build\ /i /f /v /h /y
@@ -102,6 +103,7 @@ xcopy bin\Release\MouseRec.exe.config bin\build\ /i /f /v /h /y
 xcopy Notes.txt bin\build\ /i /f /v /h /y
 xcopy LICENSE bin\build\ /i /f /v /h /y
 xcopy readme.rtf bin\build\ /i /f /v /h /y
+if exist bin\Release\Up.exe ( xcopy bin\Release\Up.exe bin\build\ /i /f /v /h /y )
 ::xcopy MouseRec\Class_SystemHook.vb bin\ /i /f /v /h /y
 xcopy packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll bin\build\ /i /f /v /h /y
 xcopy packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll bin\build\ /i /f /v /h /y
@@ -132,6 +134,6 @@ REM rename
 if exist %pt%bin\build\newMouseRec.exe (rename %pt%bin\build\newMouseRec.exe MouseRec.exe) else (echo ERROR) 
 
 
-iexpress /n %pt%bin\MouseRec.SED
+cmd /c iexpress /n %pt%bin\MouseRec.SED
 
-explorer %pt%bin\build\Setup
+cmd /c explorer %pt%bin\build\Setup

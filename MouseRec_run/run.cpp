@@ -204,7 +204,7 @@ bool IsNetfx40Installed()
 	DWORD dwRegValue = 0;
 
 	// 检查安装的注册表值存在，等于1
-	if (RegistryGetValue(HKEY_LOCAL_MACHINE, g_szNetfx40RegKeyName, g_szNetfxStandardRegValueName, NULL, (LPBYTE)& dwRegValue, sizeof(DWORD)))
+	if (RegistryGetValue(HKEY_LOCAL_MACHINE, g_szNetfx40RegKeyName, g_szNetfxStandardRegValueName, NULL, (LPBYTE)&dwRegValue, sizeof(DWORD)))
 	{
 		if (1 == dwRegValue)
 			bRetValue = true;
@@ -259,11 +259,11 @@ Inputs:        pszNetfxRegKeyName – registry key name to use for detection
 pszNetfxRegValueName – registry value to use for detection
 Results:        integer representing SP level for .NET Framework
 ******************************************************************/
-int GetNetfxSPLevel(const TCHAR * pszNetfxRegKeyName, const TCHAR * pszNetfxRegValueName)
+int GetNetfxSPLevel(const TCHAR* pszNetfxRegKeyName, const TCHAR* pszNetfxRegValueName)
 {
 	DWORD dwRegValue = 0;
 
-	if (RegistryGetValue(HKEY_LOCAL_MACHINE, pszNetfxRegKeyName, pszNetfxRegValueName, NULL, (LPBYTE)& dwRegValue, sizeof(DWORD)))
+	if (RegistryGetValue(HKEY_LOCAL_MACHINE, pszNetfxRegKeyName, pszNetfxRegValueName, NULL, (LPBYTE)&dwRegValue, sizeof(DWORD)))
 	{
 		return (int)dwRegValue;
 	}
@@ -279,7 +279,7 @@ Inputs:        NONE
 Results:        true if the build number in the registry is greater
 than or equal to the passed in version; false otherwise
 ******************************************************************/
-bool CheckNetfxBuildNumber(const TCHAR * pszNetfxRegKeyName, const TCHAR * pszNetfxRegKeyValue, const int iRequestedVersionMajor, const int iRequestedVersionMinor, const int iRequestedVersionBuild, const int iRequestedVersionRevision)
+bool CheckNetfxBuildNumber(const TCHAR* pszNetfxRegKeyName, const TCHAR* pszNetfxRegKeyValue, const int iRequestedVersionMajor, const int iRequestedVersionMinor, const int iRequestedVersionBuild, const int iRequestedVersionRevision)
 {
 	TCHAR szRegValue[MAX_PATH];
 	TCHAR* pszToken = NULL;
@@ -383,7 +383,7 @@ LPBYTE data – A buffer to save the retrieved data
 DWORD dwSize – The size of the data retrieved
 Results:        true if successful, false otherwise
 ******************************************************************/
-bool RegistryGetValue(HKEY hk, const TCHAR * pszKey, const TCHAR * pszValue, DWORD dwType, LPBYTE data, DWORD dwSize)
+bool RegistryGetValue(HKEY hk, const TCHAR* pszKey, const TCHAR* pszValue, DWORD dwType, LPBYTE data, DWORD dwSize)
 {
 	HKEY hkOpened;
 
@@ -536,24 +536,57 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		iNetfx40SPLevel = GetNetfxSPLevel(g_szNetfx40RegKeyName, g_szNetfxStandardSPxRegValueName);
 
 		if (iNetfx40SPLevel > 0)
-			
+
 			_stprintf_s(szMessage, MAX_PATH, _T(".NET Framework 4.0 service pack %i is installed."), iNetfx40SPLevel);
 		else
 			_stprintf_s(szMessage, MAX_PATH, _T(".NET Framework 4.0 is installed with no service packs."));
 
 		//MessageBox(NULL, szMessage, _T(".NET Framework 4.0"), MB_OK | MB_ICONINFORMATION);
-		//下面开始使用 ShellExecute 运行指定程序
-		if (WinExec("MouseRec.exe", SW_SHOWNORMAL) < 32) {
+		//下面开始使用 CreateProcess 运行指定程序
+		TCHAR szCmdLine[] = { TEXT("MouseRec.exe") }; //程序位置
+		STARTUPINFO si; //一些必备参数设置
+		memset(&si, 0, sizeof(si));
+		si.cb = sizeof(si);
+		si.dwFlags = STARTF_USESHOWWINDOW;
+		si.wShowWindow = SW_SHOW;
+		PROCESS_INFORMATION pi; //必备参数设置结束
 
-			_stprintf_s(szMessage, MAX_PATH, _T("运行中发生错误，错误代码 %d \n未能找到 MouseRec.exe "), 2);
+		if (!CreateProcessW(NULL, szCmdLine, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
+		{
+			_stprintf_s(szMessage, MAX_PATH, _T("运行中发生错误，错误代码 %p "), GetLastError);
 			MessageBox(NULL, szMessage, NULL, MB_OK);
+			exit(0);
 		}
-
+		// 等待进程结束
+		WaitForSingleObject(pi.hProcess,INFINITE);
+		// 关闭句柄
+		CloseHandle(pi.hProcess);
+		CloseHandle(pi.hThread);
 	}
 	else
 	{
 		MessageBox(NULL, _T(".NET 运行环境未安装或已经损坏，请先安装或修复后再次尝试。"), _T(".NET Framework  4.0"), MB_OK | MB_ICONINFORMATION);
-		WinExec("NDP462.cmd", SW_SHOWNORMAL);
+
+		TCHAR szCmdLine[] = { TEXT("NDP462.cmd") }; //程序位置
+		STARTUPINFO si; //一些必备参数设置
+		memset(&si, 0, sizeof(si));
+		si.cb = sizeof(si);
+		si.dwFlags = STARTF_USESHOWWINDOW;
+		si.wShowWindow = SW_SHOW;
+		PROCESS_INFORMATION pi; //必备参数设置结束
+
+		if (!CreateProcessW(NULL, szCmdLine, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
+		{
+			_stprintf_s(szMessage, MAX_PATH, _T("运行中发生错误，错误代码 %p "), GetLastError);
+			MessageBox(NULL, szMessage, NULL, MB_OK);
+			exit(0);
+		}
+		// 等待进程结束
+		WaitForSingleObject(pi.hProcess, INFINITE);
+		// 关闭句柄
+		CloseHandle(pi.hProcess);
+		CloseHandle(pi.hThread);
+
 	}
 
 	return 0;

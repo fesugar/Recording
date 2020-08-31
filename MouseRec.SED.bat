@@ -45,6 +45,7 @@ echo FILE1=^"MouseRec.exe^" >>%pt%bin\MouseRec.SED
 echo FILE2=^"MouseRec.exe.config^" >>%pt%bin\MouseRec.SED
 echo FILE3=^"readme.rtf^" >>%pt%bin\MouseRec.SED
 echo FILE4=^"LICENSE^" >>%pt%bin\MouseRec.SED
+if exist bin\build\Up.exe ( echo FILE5=^"Up.exe^" >>%pt%bin\MouseRec.SED )
 echo [SourceFiles] >>%pt%bin\MouseRec.SED
 echo SourceFiles0=%pt%bin\build\ >>%pt%bin\MouseRec.SED
 echo [SourceFiles0] >>%pt%bin\MouseRec.SED
@@ -53,7 +54,7 @@ echo %%FILE1%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE2%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE3%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE4%%=^ >>%pt%bin\MouseRec.SED
-
+if exist bin\build\Up.exe ( echo %%FILE5%%=^ >>%pt%bin\MouseRec.SED )
 goto end
 
 REM SED for cs
@@ -95,6 +96,7 @@ echo FILE1=^"MouseRec.exe^" >>%pt%bin\MouseRec.SED
 echo FILE2=^"MouseRec.exe.config^" >>%pt%bin\MouseRec.SED
 echo FILE3=^"readme.rtf^" >>%pt%bin\MouseRec.SED
 echo FILE4=^"LICENSE^" >>%pt%bin\MouseRec.SED
+if exist bin\build\Up.exe ( echo FILE5=^"Up.exe^" >>%pt%bin\MouseRec.SED )
 echo [SourceFiles] >>%pt%bin\MouseRec.SED
 echo SourceFiles0=%pt%bin\build\ >>%pt%bin\MouseRec.SED
 echo [SourceFiles0] >>%pt%bin\MouseRec.SED
@@ -103,6 +105,7 @@ echo %%FILE1%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE2%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE3%%=^ >>%pt%bin\MouseRec.SED
 echo %%FILE4%%=^ >>%pt%bin\MouseRec.SED
+if exist bin\build\Up.exe ( echo %%FILE5%%=^ >>%pt%bin\MouseRec.SED )
 goto end
 
 :end
