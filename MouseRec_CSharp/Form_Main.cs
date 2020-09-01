@@ -899,7 +899,7 @@ namespace MouseRec_CSharp
                 /*  GitHub - fesugar/Tupdate: 通用远程更新工具
                     https://github.com/fesugar/Tupdate 
                 */
-                Process proc = Process.Start(Application.StartupPath + @"\Up.exe", string.Format(@"{0} {1}在线升级 {2} https://raw.githubusercontent.com/fesugar/Recording/tUP.xml", Application.ProductVersion, this.Text, System.Reflection.Assembly.GetExecutingAssembly().GetName().Name));
+                Process proc = Process.Start(Application.StartupPath + @"\Up.exe", string.Format(@"{0} {1}在线升级 {2} https://raw.githubusercontent.com/fesugar/Recording/master/tUP.xml", Application.ProductVersion, this.Text, System.Reflection.Assembly.GetExecutingAssembly().GetName().Name));
                 this.WindowState = FormWindowState.Minimized;    // 最小化当前窗口到任务栏
                 manualReset.Reset();    // 暂停线程
                 if (proc != null)
