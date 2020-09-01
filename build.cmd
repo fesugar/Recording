@@ -133,7 +133,12 @@ REM rename
 :rename
 if exist %pt%bin\build\newMouseRec.exe (rename %pt%bin\build\newMouseRec.exe MouseRec.exe) else (echo ERROR) 
 
-
-cmd /c iexpress /n %pt%bin\MouseRec.SED
+if "%PROCESSOR_ARCHITECTURE%" == "AMD64" (
+   cmd /c %SystemRoot%\SysWOW64\iexpress.exe /n %pt%bin\MouseRec.SED
+) ELSE IF "%PROCESSOR_ARCHITEW6432%" == "AMD64" (
+   cmd /c %SystemRoot%\SysWOW64\iexpress.exe /n %pt%bin\MouseRec.SED
+) ELSE (
+   cmd /c %SystemRoot%\system32\iexpress.exe /n %pt%bin\MouseRec.SED
+)
 
 cmd /c explorer %pt%bin\build\Setup

@@ -1,5 +1,5 @@
 @echo off
-::start NDP462-KB3151800-x86-x64-AllOS-CHS.exe
+::start NDP462-KB3151802-Web.exe
 ECHO Microsoft .NET Framework 4.6.2 is installing  
-NDP462.exe /q /norestart
+start /B /WAIT NDP462.exe /passive /showfinalerror /showrmui /promptrestart
 if exist MouseRec.exe ( start MouseRec.exe ) else ( exit )

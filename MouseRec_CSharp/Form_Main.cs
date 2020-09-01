@@ -938,8 +938,8 @@ namespace MouseRec_CSharp
             this.dgvRec.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
 
             //about initia
-            lbl_buildtime.Text += string.Format("{0}\n\r(Version {1} )", System.IO.File.GetLastWriteTime(this.GetType().Assembly.Location), Application.ProductVersion);
-            lbl_author.Text += @"fesugar@fesugar.com";
+            lbl_buildtime.Text += string.Format("\n{0} (Ver {1})", System.IO.File.GetLastWriteTime(this.GetType().Assembly.Location), Application.ProductVersion);
+            lbl_author.Text += "\nfesugar@fesugar.com";
             lbl_prpe.Text += "\nhttps://github.com/fesugar/Recording";
         }
         /// <summary>

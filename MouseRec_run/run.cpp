@@ -558,34 +558,35 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			exit(0);
 		}
 		// 等待进程结束
-		WaitForSingleObject(pi.hProcess,INFINITE);
+		WaitForSingleObject(pi.hProcess, INFINITE);
 		// 关闭句柄
 		CloseHandle(pi.hProcess);
 		CloseHandle(pi.hThread);
 	}
 	else
 	{
-		MessageBox(NULL, _T(".NET 运行环境未安装或已经损坏，请先安装或修复后再次尝试。"), _T(".NET Framework  4.0"), MB_OK | MB_ICONINFORMATION);
-
-		TCHAR szCmdLine[] = { TEXT("NDP462.cmd") }; //程序位置
-		STARTUPINFO si; //一些必备参数设置
-		memset(&si, 0, sizeof(si));
-		si.cb = sizeof(si);
-		si.dwFlags = STARTF_USESHOWWINDOW;
-		si.wShowWindow = SW_SHOW;
-		PROCESS_INFORMATION pi; //必备参数设置结束
-
-		if (!CreateProcessW(NULL, szCmdLine, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
+		if (MessageBox(NULL, _T(".NET 运行环境未安装或已经损坏，请先安装或修复后再次尝试。"), _T(".NET Framework  4.0"), MB_OKCANCEL | MB_ICONQUESTION) == IDOK)
 		{
-			_stprintf_s(szMessage, MAX_PATH, _T("运行中发生错误，错误代码 %p "), GetLastError);
-			MessageBox(NULL, szMessage, NULL, MB_OK);
-			exit(0);
+			TCHAR szCmdLine[] = { TEXT("NDP462.cmd") }; //程序位置
+			STARTUPINFO si; //一些必备参数设置
+			memset(&si, 0, sizeof(si));
+			si.cb = sizeof(si);
+			si.dwFlags = STARTF_USESHOWWINDOW;
+			si.wShowWindow = SW_SHOW;
+			PROCESS_INFORMATION pi; //必备参数设置结束
+
+			if (!CreateProcessW(NULL, szCmdLine, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi))
+			{
+				_stprintf_s(szMessage, MAX_PATH, _T("运行中发生错误，错误代码 %p "), GetLastError);
+				MessageBox(NULL, szMessage, NULL, MB_OK);
+				exit(0);
+			}
+			// 等待进程结束
+			WaitForSingleObject(pi.hProcess, INFINITE);
+			// 关闭句柄
+			CloseHandle(pi.hProcess);
+			CloseHandle(pi.hThread);
 		}
-		// 等待进程结束
-		WaitForSingleObject(pi.hProcess, INFINITE);
-		// 关闭句柄
-		CloseHandle(pi.hProcess);
-		CloseHandle(pi.hThread);
 
 	}
 
